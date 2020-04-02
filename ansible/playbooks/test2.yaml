@@ -1,0 +1,11 @@
+- hosts: 19-134
+  tasks:
+
+    - name: Install Httpd Server
+      yum: name=httpd,httpd-tools state=installed
+
+    #- name: Configure Httpd Server
+    #  copy: src=./httpd.conf dest=/etc/httpd/conf/httpd.conf
+
+    - name: Start Httpd Server
+      service: name=httpd state=started enabled=yes 

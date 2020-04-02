@@ -1,0 +1,20 @@
+- hosts: 19-134
+  tasks:
+  - name: install web server
+    yum: 
+      name: 
+      - httpd
+      - redis
+      state: present
+  - name: start web server
+    service:
+      name:
+        httpd
+      state: started
+      enabled: yes
+  - name: start web server
+    service:
+      name:
+        redis
+      state: started
+      enabled: yes
