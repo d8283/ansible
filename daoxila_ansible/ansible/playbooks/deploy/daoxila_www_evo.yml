@@ -1,0 +1,10 @@
+---
+# 部署daoxila_www_evo
+- hosts:
+  - daoxila_www_evo_fpm
+  tasks:
+  - service: name=php-fpm state=stopped
+  - yum: name=daoxila_www_evo state=latest update_cache=yes
+  - file: path=/www/daoxila/daoxila_www_evo owner=nobody group=nobody state=directory recurse=yes
+  - service: name=php-fpm state=started
+  serial: "30%"

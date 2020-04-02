@@ -1,0 +1,4 @@
+---
+- hosts: webpack
+  roles:
+  - deploy_webpack

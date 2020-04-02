@@ -1,0 +1,11 @@
+---
+# 安装ntp，但不配置具体参数，被ntp_client和ntp_server依赖
+- name: install ntp
+  yum:
+    name: ntp
+    state: present
+- name: start ntp
+  service:
+    name: ntpd
+    state: started
+    enabled: yes

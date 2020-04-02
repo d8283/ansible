@@ -1,0 +1,15 @@
+{
+    "quniuURL": {
+        "{{ qiniu.buckets.image_hunche.key }}": "{{ qiniu.buckets.image_hunche.url }}",
+        "{{ qiniu.buckets.audio.key }}": "{{ qiniu.buckets.audio.url }}",
+        "{{ qiniu.buckets.binary.key }}": "{{ qiniu.buckets.binary.url }}",
+        "{{ qiniu.buckets.image.key }}": "{{ qiniu.buckets.image.url }}",
+        "{{ qiniu.buckets.vframe.key }}": "{{ qiniu.buckets.vframe.url }}",
+        "{{ qiniu.buckets.video.key }}": "{{ qiniu.buckets.video.url }}"
+    },
+    "mongo": {
+        "host": "{{ groups.mongodb|first }}",
+        "database": "marriage"
+    },
+    "ServerID": "node-{{ inventory_hostname|ipaddr('int') % 256 }}"
+}

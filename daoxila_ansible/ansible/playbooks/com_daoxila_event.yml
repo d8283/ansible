@@ -1,0 +1,5 @@
+---
+- hosts: com_daoxila_event_nginx
+  roles:
+    - common_public
+    - com_daoxila_event_nginx

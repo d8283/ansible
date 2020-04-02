@@ -1,0 +1,7 @@
+---
+# 增加一个私有yum源，用于发布代码
+- name: set up daoxila release repo
+  template:
+    src: dxl_release.repo.j2
+    dest: /etc/yum.repos.d/dxl_release.repo
+  register: result

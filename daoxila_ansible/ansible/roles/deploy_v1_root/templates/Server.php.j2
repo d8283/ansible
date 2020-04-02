@@ -1,0 +1,79 @@
+<?php
+class Ext_Server
+{
+    const upload_save_path = '/NFS/daoxila/v1/upload/';
+    const upload_save_temp_path = '/NFS/daoxila/v1/tmp/';
+    const dxl_api_url = 'http://service.daoxila.com/';
+    const dxl_api_username = 'dxl';
+    const dxl_api_password = '1234';
+
+    const dxl_redis_host = '{{ groups.redis|first }}';
+    const dxl_redis_port = 6379;
+    const dxl_redis_timeout = 300;
+
+    static $config_memcache_servers = array(
+        'servers' => array(
+            "{{ groups.memcache|first }}:11211",
+            "{{ groups.memcache|first }}:11212",
+            "{{ groups.memcache|first }}:11213",
+            "{{ groups.memcache|first }}:11214"
+        ),
+        'persistant' => false,
+        'compress_threshold' => 10240
+    );
+    const FAX_URL = "http://fax.daoxila.net:8081/";
+    //获得传真验证key
+static function getFaxKey()
+    {
+        return array(
+            1    =>   'WWFX7tA0UHaDD8wT',
+            2    =>   'lGOmSlMuonF1lcfN',
+            3    =>   'YGHcpzREv4dZ0rhq',
+            4    =>   'XX8PLZiH6maEkeUZ',
+            5    =>   'MbeD8pzXtuXh0FVS',
+            6    =>   'RIyQPhMBYeaADFvU'
+        );
+    }
+
+
+    const ENABLE_DB_W_R = 1;
+    /**
+     * 数据库连接配置 -写
+     */
+    static function db_write(){
+        return array (
+                    "host" => "sql-master",
+                    "username" => "{{ mysql_user }}",
+                    "password" => "{{ mysql_pass }}",
+                    "dbname" => "dxl_exodus",
+                    "prefix" => "",
+                    "driver_options" => array(
+                                        1002 => "SET NAMES UTF8;"),
+                    "charset" => NULL,
+                    "persistent" => false,
+                    "options" => array(
+                                    "caseFolding" => 0,
+                                    "autoQuoteIdentifiers" => true)
+          );
+    }
+    /**
+     * 数据库连接配置-读
+     */
+    static function db_read(){
+
+        return array (
+                    "host" => "sql-slave",
+                    "username" => "{{ mysql_slave_user }}",
+                    "password" => "{{ mysql_slave_pass }}",
+                    "dbname" => "dxl_exodus",
+                    "prefix" => "",
+                    "driver_options" => array(
+                                        1002 => "SET NAMES UTF8;"),
+                    "charset" => NULL,
+                    "persistent" => false,
+                    "options" => array(
+                                    "caseFolding" => 0,
+                                    "autoQuoteIdentifiers" => true)
+          );
+    }
+}

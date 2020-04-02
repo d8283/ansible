@@ -1,0 +1,4 @@
+---
+- hosts: redis
+  tasks:
+    - command: redis-cli -r 1 flushall

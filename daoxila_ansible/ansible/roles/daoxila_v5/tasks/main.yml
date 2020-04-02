@@ -1,0 +1,10 @@
+---
+- template:
+    src: daoxila_v5.conf.j2
+    dest: /etc/httpd/conf.d/daoxila_v5.conf
+  notify: restart apache
+- name: start apache
+  service:
+    name: httpd
+    enabled: yes
+    state: started

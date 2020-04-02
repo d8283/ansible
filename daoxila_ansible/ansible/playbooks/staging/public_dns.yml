@@ -1,0 +1,11 @@
+---
+# staging环境特有的dns服务
+- hosts:
+    - staging_public_dns
+  roles:
+    - yum_aliyun
+    - yum_daoxila_release
+    - timezone_shanghai
+    - disable_postfix
+    - ntp_client
+    - staging_public_dns

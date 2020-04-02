@@ -1,0 +1,5 @@
+---
+dependencies:
+- php_fpm
+- user_nobody
+- env_php

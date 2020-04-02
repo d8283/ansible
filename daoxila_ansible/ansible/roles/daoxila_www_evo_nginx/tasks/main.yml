@@ -1,0 +1,16 @@
+---
+- name: add www_evo upstream conf
+  template:
+    src: daoxila_www_evo.upstream.conf.j2
+    dest: /etc/nginx/upstreams/daoxila_www_evo.conf
+  notify: restart nginx
+- name: add www_evo nginx conf
+  template:
+    src: daoxila_www_evo.site.conf.j2
+    dest: /etc/nginx/sites-enabled/daoxila_www_evo.conf
+  notify: restart nginx
+- name: start nginx
+  service:
+    name: tengine
+    state: started
+    enabled: yes

@@ -1,0 +1,10 @@
+---
+- yum: name=supervisor state=present
+- file:
+    state: directory
+    path: /etc/supervisord
+- copy:
+    src: supervisord.conf
+    dest: /etc/supervisord.conf
+  notify: restart supervisor
+- service: name=supervisord state=started enabled=yes

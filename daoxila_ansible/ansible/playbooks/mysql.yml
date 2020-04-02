@@ -1,0 +1,16 @@
+---
+- name: mysql master
+  hosts: mysql_master
+  roles:
+    - common
+    - role: mysql_master
+      master_user: repl
+      master_password: slavepass
+- name: mysql slave
+  hosts: mysql_slave
+  roles:
+    - common
+    - role: mysql_slave
+      master_host: "{{ groups.mysql_master|first }}"
+      master_user: repl
+      master_password: slavepass

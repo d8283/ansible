@@ -1,0 +1,14 @@
+---
+# 证书
+- name: folder for cert
+  file:
+    path: /etc/nginx/daoxila
+    state: directory
+- name: copy cer
+  copy:
+    src: daoxila_com.cer
+    dest: /etc/nginx/daoxila/daoxila_com.cer
+- name: copy key
+  copy:
+    src: daoxila_com.key
+    dest: /etc/nginx/daoxila/daoxila_com.key

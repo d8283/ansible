@@ -1,0 +1,3 @@
+---
+- shell: sed -ri "/css_version/s/^.*$/        'css_version' => '$(date +%s)',/" {{ workspace }}/{{ project }}/Configs/common/site.php
+- shell: sed -ri  "/js_version/s/^.*$/        'js_version'  => '$(date +%s)',/" {{ workspace }}/{{ project }}/Configs/common/site.php

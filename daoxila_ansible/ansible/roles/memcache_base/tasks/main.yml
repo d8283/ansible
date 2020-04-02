@@ -1,0 +1,22 @@
+---
+# 安装基础memcache服务，包含一个端口参数port，设置memcache使用的端口
+# 参见memcache/meta/main.yml
+- name: install memcached
+  yum:
+    name: memcached
+    state: present
+- name: don't start memcached with service
+  service:
+    name: memcached
+    enabled: no
+    state: stopped
+- name: "add upstart conf for memcache {{ port }}"
+  template:
+    src: memcached.conf.j2
+    dest: "/etc/init/memcached_{{ port }}.conf"
+  notify: "restart memcached_{{ port }}"
+- name: "start memcached instances {{ port }}"
+  service:
+    name: "memcached_{{ port }}"
+    state: started
+    enabled: yes

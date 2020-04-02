@@ -1,0 +1,5 @@
+---
+# 禁用selinux，注意，会触发节点重启
+- hosts: all
+  roles:
+    - disable_selinux

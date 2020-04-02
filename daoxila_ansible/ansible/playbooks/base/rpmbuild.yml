@@ -1,0 +1,4 @@
+---
+- hosts: repo_daoxila_release
+  roles:
+  - rpmbuild

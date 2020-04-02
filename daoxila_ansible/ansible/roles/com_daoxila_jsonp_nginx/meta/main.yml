@@ -1,0 +1,6 @@
+---
+dependencies:
+- tengine
+- com_daoxila_nginx_upstream
+- uploadify
+- cert_daoxila_com

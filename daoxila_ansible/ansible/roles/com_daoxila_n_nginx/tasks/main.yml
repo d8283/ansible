@@ -1,0 +1,11 @@
+---
+- name: add n.daoxila.com nginx conf
+  template:
+    src: nginx.n_daoxila_com.conf.j2
+    dest: /etc/nginx/sites-enabled/n_daoxila_com.conf
+  notify: reload nginx
+- name: start nginx
+  service:
+    name: tengine
+    state: started
+    enabled: yes

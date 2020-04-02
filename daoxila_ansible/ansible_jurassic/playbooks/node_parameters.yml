@@ -1,0 +1,5 @@
+---
+- hosts: daoxila_node
+  roles:
+  - node_parameters
+  serial: 1

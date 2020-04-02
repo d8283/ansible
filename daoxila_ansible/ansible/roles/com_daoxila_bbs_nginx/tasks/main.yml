@@ -1,0 +1,12 @@
+---
+- name: add bbs nginx conf
+  template:
+    src: daoxila_discuz.site.conf.j2
+    dest: /etc/nginx/sites-enabled/daoxila_discuz.conf
+  notify: restart nginx
+- name: start nginx
+  service:
+    name: tengine
+    state: started
+    enabled: yes
+

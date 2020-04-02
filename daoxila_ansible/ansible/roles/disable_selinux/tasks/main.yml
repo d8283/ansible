@@ -1,0 +1,12 @@
+---
+- name: disable selinux temporarily
+  shell: "selinuxenabled && setenforce 0"
+  failed_when: False
+  register: result
+  changed_when: result|success
+- name: disable selinux persistently
+  shell: "grep -qw SELINUX=enforcing /etc/selinux/config && sed -i 's/SELINUX=enforcing/SELINUX=disabled/' /etc/selinux/config"
+  register: result
+  changed_when: result|success
+  failed_when: result.stderr|length > 0
+  notify: reboot

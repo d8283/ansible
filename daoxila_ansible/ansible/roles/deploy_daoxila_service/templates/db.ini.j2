@@ -1,0 +1,31 @@
+; --- 默认读取的数据库 ---
+default_db                      = main
+; --- 开启读写分离  ---
+main.enable_w_r                 = 1
+; --- 主库配置 ---
+main.master.driver              = Pdo_Mysql
+main.master.host                = {{ groups.mysql_master|first }}
+main.master.username            = {{ mysql_master_user }}
+main.master.password            = {{ mysql_master_pass }}
+main.master.dbname              = dxl_exodus
+main.master.driver_options.1002 = "SET NAMES UTF8"
+main.master.characterset        = utf-8
+
+; --- 从库配置 ---
+main.slave.driver               = Pdo_Mysql
+main.slave.host                 = {{ groups.mysql_slave|first }}
+main.slave.username             = {{ mysql_slave_user }}
+main.slave.password             = {{ mysql_slave_pass }}
+main.slave.dbname               = dxl_exodus
+main.slave.driver_options.1002  = "SET NAMES UTF8"
+main.slave.characterset         = utf-8
+
+; --- api库配置 ---
+api.enable_w_r                  = 0
+api.master.driver               = Pdo_Mysql
+api.master.host                 = {{ groups.mysql_master|first }}
+api.master.username             = {{ mysql_master_user }}
+api.master.password             = {{ mysql_master_pass }}
+api.master.dbname               = api
+api.master.driver_options.1002  = "SET NAMES UTF8"
+api.master.characterset         = utf-8

@@ -1,0 +1,12 @@
+---
+dependencies:
+- role: memcache_base
+  port: 11211
+- role: memcache_base
+  port: 11212
+- role: memcache_base
+  port: 11213
+- role: memcache_base
+  port: 11214
+- role: memcache_base
+  port: 11215

@@ -1,0 +1,40 @@
+upstream daoxila_discuz {
+{% for host in groups.daoxila_discuz %}
+  server {{ host }}:80;
+{% endfor %}
+}
+
+server {
+  listen 80;
+  server_name bbs.daoxila.com;
+
+  location / {
+    proxy_pass                  http://daoxila_discuz;
+    proxy_set_header            X-Forwarded-Proto $scheme;
+    proxy_next_upstream         http_502 http_504 error timeout invalid_header;
+    proxy_set_header Host       $host;
+    proxy_set_header            Proxy-Host $proxy_host;
+    add_header                  Cache-Control no-cache;
+  }
+
+  location ~ .*\.(gif|jpg|jpeg|png|bmp|swf|js|css)$ {
+    proxy_next_upstream http_502 http_504 error timeout invalid_header;
+    #proxy_cache cache_one;
+    #proxy_cache_valid 200 304 12h;
+    #proxy_cache_valid 301 302 1m;
+    #proxy_cache_valid any 1m;
+    proxy_cache_key $host$uri$is_args$args;
+    proxy_set_header  Host $host;
+    proxy_set_header Proxy-Host    $proxy_host;
+    proxy_set_header  X-Real-IP  $remote_addr;
+    proxy_set_header X-Forwarded-For $remote_addr;
+    proxy_set_header Accept-Encoding "none";
+    proxy_ignore_headers "Cache-Control";
+    proxy_pass http://daoxila_discuz;
+    proxy_set_header        X-Forwarded-Proto $scheme;
+    expires  max;
+  }
+
+  error_log /var/log/nginx/daoxila_discuz-error.log;
+  access_log /var/log/nginx/daoxila_discuz-access.log;
+}

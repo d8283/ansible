@@ -1,0 +1,21 @@
+---
+# 安装php solr扩展
+- name: install gcc
+  yum:
+    name: gcc
+    state: present
+- name: install lib for solr
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - libcurl-devel
+    - libxml2-devel
+- name: install solr
+  shell: "printf \"\\n\" | pecl install solr"
+  args:
+    creates: /usr/lib64/php/modules/solr.so
+- name: load solr
+  copy:
+    dest: /etc/php.d/solr.ini
+    content: extension=solr.so

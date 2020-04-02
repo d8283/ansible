@@ -1,0 +1,7 @@
+---
+# 部署代码daoxila_www
+- hosts:
+  - daoxila_www
+  roles:
+  - deploy_daoxila_www
+  serial: "30%"

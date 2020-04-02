@@ -1,0 +1,18 @@
+---
+- service:
+    name: "{{ item }}"
+    state: started
+    enabled: yes
+  with_items:
+    - rpcbind
+    - nfs
+- file:
+    path: /var/nfsshare
+    state: directory
+    mode: 0755
+    owner: nobody
+    group: nobody
+- copy:
+    src: exports
+    dest: /etc/exports
+  notify: restart nfs-server

@@ -1,0 +1,13 @@
+---
+# greentea的负载均衡反向代理
+- name: nginx for greentea
+  hosts: daoxila_greentea_nginx
+  roles:
+    - common
+    - daoxila_greentea_nginx
+# greentea的运行环境
+- name: greentea
+  hosts: daoxila_greentea_fpm
+  roles:
+    - common
+    - daoxila_greentea_fpm

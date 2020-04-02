@@ -1,0 +1,5 @@
+---
+dependencies:
+- tengine
+- cert_daoxila_com
+- com_daoxila_nginx_upstream

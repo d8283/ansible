@@ -1,0 +1,47 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_driver: pdo_mysql
+    database_driver1: pdo_mysql
+    database_host: {{ main_host }}
+    database_user: {{ main_user }}
+    database_password: {{ main_passwd }}
+    database_exodus_name: {{ db_exodus }}
+    database_3rd_name: {{ db_3rd }}
+    database_new_host: {{ new_host }}
+    database_honeymoon_user: {{ honeymoon_user }}
+    database_honeymoon_password: {{ honeymoon_passwd }}
+    database_honeymoon_name: {{ db_honeymoon }}
+    database_clothing_user: {{ clothing_user }}
+    database_clothing_password: {{ clothing_passwd }}
+    database_clothing_name: {{ db_clothing }}
+    database_ceremony_user: {{ ceremony_user }}
+    database_ceremony_password: {{ ceremony_passwd }}
+    database_ceremony_name: {{ db_ceremony }}
+    rabbitmq_host: {{ mq_host }}
+    rabbitmq_port: {{ mq_port }}
+    rabbitmq_user: {{ mq_user }}
+    rabbitmq_pass: {{ mq_pass }}
+    rabbitmq_3rd_exchange: {{ mq_3rd_topic }}
+    call_path: {{ call_path }}
+    locale: en
+    secret: Drj3wRhicFcuRhLquRFj)Ww4
+    accessKey: {{ qiniu_accessKey }}
+    secretKey: {{ qiniu_secretKey }}
+    audio_url: 'http://3rd.daoxila.com/audio/'
+    domain: {{ qiniu_domain }}
+    bucket: {{ qiniu_bucket }}
+    mailer_transport: smtp
+    mailer_host: {{ mail_host }}
+    mailer_user: {{ mail_user }}
+    mailer_password: {{ mail_pass }}
+    redis_server: {{ redis_server }}
+    redis_unbindqueue: {{ redis_unbind_server }}
+    v6_host: {{ v6_host }}
+    call.request_config:
+        id: {{ lami_api_id }}
+        key: {{ lami_api_key }}
+        host: {{ lami_api_host }}
+    other.request_config:
+        id: {{lami_kefu_api_id}}
+        key: {{lami_kefu_api_key}}
+        host: {{lami_kefu_api_host}}

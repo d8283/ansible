@@ -1,0 +1,10 @@
+---
+- include: "daoxila-tengine.yml"
+  when: project == '' or project == 'daoxila-tengine'
+- include: "php53.yml"
+  when: project == '' or project == 'php53'
+- include: "php56.yml"
+  when: project == '' or project == 'php56'
+- include: "mongodb.yml"
+  when: project == '' or project == 'mongodb'
+- command: createrepo --update {{ repobase }}

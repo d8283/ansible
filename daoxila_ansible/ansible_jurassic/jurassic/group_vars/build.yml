@@ -1,0 +1,6 @@
+---
+workspace: /pub/release/workspace
+build_output: /pub/release/build
+svn_username: co
+svn_password: co1234xpxp
+release_output: /var/www/release

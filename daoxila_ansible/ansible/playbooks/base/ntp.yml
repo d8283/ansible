@@ -1,0 +1,10 @@
+---
+# ntp服务
+- hosts: ntp
+  roles:
+    - yum_aliyun
+    - timezone_shanghai
+    - disable_iptables
+    - disable_postfix
+    - dnsmasq_client
+    - ntp_server

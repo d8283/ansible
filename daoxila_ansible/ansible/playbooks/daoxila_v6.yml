@@ -1,0 +1,13 @@
+---
+# daoxila_v6的负载均衡反向代理
+- name: nginx for v6
+  hosts: daoxila_v6_nginx
+  roles:
+    - common
+    - daoxila_v6_nginx
+# daoxila_v6的运行环境
+- name: v6
+  hosts: daoxila_v6_fpm
+  roles:
+    - common
+    - daoxila_v6_fpm

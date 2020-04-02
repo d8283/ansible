@@ -1,0 +1,28 @@
+---
+# 安装nodejs
+- set_fact:
+    node_version: 4.4.3
+- name: upload nodejs pkg
+  get_url:
+    url: http://npm.taobao.org/mirrors/node/v{{ node_version }}/node-v{{ node_version }}-linux-x64.tar.gz
+    dest: /root/node-v{{ node_version }}-linux-x64.tar.gz
+- shell: node -v
+  register: result
+  failed_when: False
+  changed_when: False
+- name: install nodejs
+  shell: tar -xzf /root/node-v{{ node_version }}-linux-x64.tar.gz -C /usr/local --strip-components=1
+  when: "result.stdout != 'v{{ node_version }}'"
+- name: set NVM_NODEJS_ORG_MIRROR
+  lineinfile:
+    dest: /etc/environment
+    regexp: ^NVM_NODEJS_ORG_MIRROR=
+    line: NVM_NODEJS_ORG_MIRROR=http://npm.taobao.org/mirrors/node
+- name: npm registry set?
+  shell: npm config get registry | grep -qw taobao
+  register: result
+  failed_when: False
+  changed_when: False
+- name: set npm registry
+  command: npm config set registry http://registry.npm.taobao.org
+  when: result|failed

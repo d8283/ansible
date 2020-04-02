@@ -1,0 +1,5 @@
+---
+# 私有yum源同步webtatic(php5.6)
+- hosts: repo_daoxila_release
+  roles:
+    - repo_daoxila_release_webtatic

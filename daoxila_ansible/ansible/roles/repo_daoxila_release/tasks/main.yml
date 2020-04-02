@@ -1,0 +1,38 @@
+---
+# 建立私有yum源
+- name: install createrepo
+  yum:
+    name: createrepo
+    state: present
+- name: create directory for RPMs
+  file:
+    path: /data/yum_daoxila_release
+    state: directory
+- name: createrepo
+  command: createrepo --database /data/yum_daoxila_release
+  args:
+    creates: /data/yum_daoxila_release/repodata
+- name: install httpd
+  yum:
+    name: httpd
+    state: present
+- name: cleanup httpd conf directory
+  file:
+    path: /etc/httpd/conf.d/welcome.conf
+    state: absent
+  notify: restart httpd
+- name: set up site conf
+  template:
+    src: dxl_repo.conf.j2
+    dest: /etc/httpd/conf.d/dxl_repo.conf
+  notify: restart httpd
+- name: start httpd
+  service:
+    name: httpd
+    state: started
+    enabled: yes
+- name: upload RPMs
+  copy:
+    src: rpms/
+    dest: /data/yum_daoxila_release/
+  notify: update yum repo

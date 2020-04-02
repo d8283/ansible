@@ -1,0 +1,22 @@
+---
+# 安装php-fpm，需要注意是基于php56角色的
+- name: php-fpm.conf
+  template:
+    src: php-fpm.conf.j2
+    dest: /etc/php-fpm.conf
+- name: remove default site conf
+  file:
+    path: /etc/php-fpm.d/www.conf
+    state: absent
+- name: correct php-fpm log directory owner
+  file:
+    path: /var/log/php-fpm
+    owner: nobody
+    group: nobody
+    state: directory
+- name: restart php-fpm if php.ini changes
+  service:
+    name: php-fpm
+    state: restarted
+  failed_when: False
+  when: php56_php_ini.changed

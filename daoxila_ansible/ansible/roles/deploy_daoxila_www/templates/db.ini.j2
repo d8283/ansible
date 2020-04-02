@@ -1,0 +1,84 @@
+; --- 默认读取的数据库 ---
+default_db                      = main
+[main]
+; --- 开启读写分离  ---
+enable_w_r              = 1
+; --- 主库配置 ---
+master['driver']            = Pdo_Mysql
+master['host']              = {{ groups.mysql_master|first }}
+master['port']              = 3306
+master['username']          = {{ mysql_master_user }}
+master['password']          = {{ mysql_master_pass }}
+master['dbname']            = dxl_exodus
+master['persistent']            = false
+master['characterset']          = utf8
+; --- 从库配置 ---
+slave['driver']             = Pdo_Mysql
+slave['host']               = {{ groups.mysql_slave|first }}
+slave['port']               = 3306
+slave['username']           = {{ mysql_slave_user }}
+slave['password']           = {{ mysql_slave_pass }}
+slave['dbname']             = dxl_exodus
+slave['persistent']         = false
+slave['characterset']           = utf8
+
+
+[info]
+; --- 开启读写分离  ---
+enable_w_r              = 1
+; --- 主库配置 ---
+master['driver']            = Pdo_Mysql
+master['host']              = {{ groups.mysql_master|first }}
+master['port']              = 3306
+master['username']          = {{ mysql_master_user }}
+master['password']          = {{ mysql_master_pass }}
+master['dbname']            = dxl_info
+master['persistent']            = false
+master['characterset']          = utf8
+; --- 从库配置 ---
+slave['driver']             = Pdo_Mysql
+slave['host']               = {{ groups.mysql_slave|first }}
+slave['port']               = 3306
+slave['username']           = {{ mysql_slave_user }}
+slave['password']           = {{ mysql_slave_pass }}
+slave['dbname']             = dxl_info
+slave['persistent']         = false
+slave['characterset']           = utf8
+
+; --- dxl_api ---
+[dxl_api]
+enable_w_r = DB_RW_ON
+master['host'] = DB_MAIN_MASTER_HOST
+master['username'] = DB_MAIN_MASTER_USER
+master['password'] = DB_MAIN_MASTER_PWD
+master['dbname'] = DB_DXLAPI_DBNAME
+master['port'] = 3306
+master['db_dsn'] = 'mysql:'
+master['characterset'] = utf8
+master['db_type'] = Pdo
+master['db_params'] = ''
+master['persistent'] = ''
+
+slave['host'] = DB_MAIN_MASTER_HOST
+slave['username'] = DB_MAIN_MASTER_USER
+slave['password'] = DB_MAIN_MASTER_PWD
+slave['dbname'] = DB_DXLAPI_DBNAME
+slave['port'] = 3306
+slave['db_dsn'] = 'mysql:'
+slave['characterset'] = utf8
+slave['db_type'] = Pdo
+slave['db_params'] = ''
+slave['persistent'] = ''
+
+[api]
+; --- 开启读写分离  ---
+enable_w_r              = 0
+; --- 主库配置 ---
+master['driver']            = Pdo_Mysql
+master['host']              = {{ groups.mysql_master|first }}
+master['port']              = 3306
+master['username']          = {{ mysql_master_user }}
+master['password']          = {{ mysql_master_pass }}
+master['dbname']            = api
+master['persistent']            = false
+master['characterset']          = utf8

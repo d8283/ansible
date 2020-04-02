@@ -1,0 +1,26 @@
+---
+v6_jobs:
+  - name: v6-pay-sync-member-enterprise
+    args: pay:sync-member enterprise
+  - name: v6-pay-sync-member-personal
+    args: pay:sync-member personal
+  - name: v6-pay-finish
+    args: pay:finish
+  - name: v6-pay-refund
+    args: pay:refund
+  - name: v6-pay-notify
+    args: pay:notify
+  - name: v6-pay-close
+    args: pay:close
+  - name: v6-pay-crm-request
+    args: pay:crm_request
+  - name: v6-pay-send-mail
+    args: pay:send-mail
+  - name: v6-pay-insurance
+    args: pay:insurance
+  - name: v6-coupon-expire
+    args: coupon:expire
+env_path: /usr/local/server/apache/conf/env/Env.php
+php_bin: /usr/local/server/php/bin/php
+project: daoxila_v6
+project_root: /www/daoxila

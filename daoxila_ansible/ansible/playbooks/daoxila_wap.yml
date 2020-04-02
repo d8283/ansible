@@ -1,0 +1,8 @@
+---
+# daoxila_wap的运行环境
+- name: wap
+  hosts: daoxila_wap
+  roles:
+    - common
+    - nfs_client
+    - daoxila_wap

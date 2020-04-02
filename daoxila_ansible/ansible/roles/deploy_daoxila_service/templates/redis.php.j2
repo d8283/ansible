@@ -1,0 +1,10 @@
+<?php
+/**
+ * redis配置
+ *  author luck.wang 2012.12.05
+ */
+return array(
+    'host'=>'{{ groups.redis|first }}',
+    'port'=>6379,
+    'timeout'=>300
+);

@@ -1,0 +1,4 @@
+---
+- hosts: php
+  roles:
+  - role: secure_imagick

@@ -1,0 +1,2 @@
+---
+- yum: name=daoxila_event state=latest update_cache=yes

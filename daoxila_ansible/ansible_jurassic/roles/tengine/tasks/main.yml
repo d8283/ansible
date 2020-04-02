@@ -1,0 +1,40 @@
+---
+- file:
+    path: /root/bin
+    state: directory
+- copy:
+    src: upstream-node-ctl
+    dest: /root/bin/upstream-node-ctl
+- file:
+    path: /root/bin/upstream-node-ctl
+    mode: u+x
+    state: file
+- name: nginx.conf
+  copy:
+    src: nginx.conf
+    dest: /usr/local/server/tengine/conf/nginx.conf
+  notify: restart tengine
+- name: upstreams folder
+  file:
+    path: /usr/local/server/tengine/conf/upstreams
+    state: directory
+- name: greentea upstream
+  template:
+    src: daoxila_greentea.conf.j2
+    dest: /usr/local/server/tengine/conf/upstreams/daoxila_greentea.conf
+  notify: restart tengine
+- name: v6 upstream
+  template:
+    src: daoxila_v6.conf.j2
+    dest: /usr/local/server/tengine/conf/upstreams/daoxila_v6.conf
+  notify: restart tengine
+- name: v7 upstream
+  template:
+    src: daoxila_v7.conf.j2
+    dest: /usr/local/server/tengine/conf/upstreams/daoxila_v7.conf
+  notify: restart tengine
+- name: www_evo upstream
+  template:
+    src: daoxila_www_evo.conf.j2
+    dest: /usr/local/server/tengine/conf/upstreams/daoxila_www_evo.conf
+  notify: restart tengine

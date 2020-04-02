@@ -1,0 +1,15 @@
+---
+- name: check necessary variables
+  assert:
+    that: project != '' and tag != ''
+- shell: "test -f {{ release_output }}/{{ project }}/{{ tag|sanitize_tag_name }}.tgz"
+  register: built
+  failed_when: false
+  changed_when: false
+- include: build.yml
+  when: built|failed or force != false
+- name: point latest to new tar
+  file:
+    path: "{{ release_output }}/{{ project }}/latest.tgz"
+    src: "{{ tag|sanitize_tag_name }}.tgz"
+    state: link

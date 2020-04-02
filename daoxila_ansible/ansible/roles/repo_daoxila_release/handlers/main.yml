@@ -1,0 +1,7 @@
+---
+- name: restart httpd
+  service:
+    name: httpd
+    state: restarted
+- name: update yum repo
+  command: createrepo --update /data/yum_daoxila_release/

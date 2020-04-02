@@ -1,0 +1,9 @@
+---
+- name: restart tengine
+  service: name=tengine state=restarted
+- name: reload tengine
+  command: /usr/sbin/nginx -s reload
+- name: restart nginx
+  service: name=tengine state=restarted
+- name: reload nginx
+  command: /usr/sbin/nginx -s reload

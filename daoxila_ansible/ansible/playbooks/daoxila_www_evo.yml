@@ -1,0 +1,14 @@
+---
+# daoxila_www_evo的负载均衡反向代理
+- name: nginx for www_evo
+  hosts: daoxila_www_evo_nginx
+  roles:
+    - common
+    - daoxila_www_evo_nginx
+# daoxila_www_evo的运行环境
+- name: www_evo
+  hosts: daoxila_www_evo_fpm
+  roles:
+    - common
+    - nfs_client
+    - daoxila_www_evo

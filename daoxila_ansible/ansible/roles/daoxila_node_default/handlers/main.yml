@@ -1,0 +1,4 @@
+---
+- name: pm2 restart all
+  command: pm2 restart all
+  failed_when: no

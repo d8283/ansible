@@ -1,0 +1,4 @@
+---
+- hosts: tengine
+  roles:
+  - tengine

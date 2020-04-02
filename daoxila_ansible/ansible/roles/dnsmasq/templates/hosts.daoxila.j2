@@ -1,0 +1,78 @@
+{% for host in groups.com_daoxila_nginx %}
+{{ host }} daoxila.com
+{% endfor %}
+
+{% for host in groups.com_daoxila_jsonp_nginx %}
+{{ host }} jsonp.daoxila.com
+{% endfor %}
+
+{% for host in groups.com_daoxila_my_nginx %}
+{{ host }} my.daoxila.com
+{% endfor %}
+
+{% for host in groups.com_daoxila_m_nginx %}
+{{ host }} m.daoxila.com
+{% endfor %}
+
+{% for host in groups.com_daoxila_api_nginx %}
+{{ host }} api.daoxila.com
+{% endfor %}
+
+{% for host in groups.com_dxlfile_s4_nginx %}
+{{ host }} s4.dxlfile.com
+{% endfor %}
+
+{% for host in groups.daoxila_www_evo_nginx %}
+{{ host }} shanghai.daoxila.com
+{% endfor %}
+
+{% for host in groups.com_daoxila_sys2_nginx %}
+{{ host }} sys2.daoxila.com
+{% endfor %}
+
+{% for host in groups.com_daoxila_cms2_nginx %}
+{{ host }} cms2.daoxila.com
+{% endfor %}
+
+{% for host in groups.com_daoxila_bbs_nginx %}
+{{ host }} bbs.daoxila.com
+{% endfor %}
+
+{% for host in groups.daoxila_v6_nginx %}
+{{ host }} v6.daoxila.org
+{% endfor %}
+
+{% for host in groups.daoxila_greentea_nginx %}
+{{ host }} greentea.daoxila.org
+{% endfor %}
+
+{% for host in groups.solr_nginx %}
+{{ host }} solr.daoxila.org
+{% endfor %}
+
+{% for host in groups.daoxila_service_nginx %}
+{{ host }} service.daoxila.com
+{{ host }} web.service.daoxila.org
+{% endfor %}
+
+{% for host in groups.daoxila_www %}
+{{ host }} www.daoxila.dev
+{{ host }} daoxila.dev
+{% endfor %}
+
+{% for host in groups.repo_daoxila_release %}
+{{ host }} repo.daoxila.org
+{% endfor %}
+
+{{ groups.mysql_master|first }} sql-master
+{{ groups.mysql_slave|first }} sql-slave
+
+{{ groups.memcache_session|first }} mem-session
+
+{{ groups.memcache|first }} mem-1
+{{ groups.memcache|first }} mem-2
+{{ groups.memcache_new|first }} mem-3
+
+{{ groups.redis|first }} redis-server
+
+{{ groups.rabbitmq|first }} rabbitmq

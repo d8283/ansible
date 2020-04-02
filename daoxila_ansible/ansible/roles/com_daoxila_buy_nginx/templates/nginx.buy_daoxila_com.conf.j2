@@ -1,0 +1,14 @@
+server {
+  listen       80;
+  server_name  buy.daoxila.com;
+  index index.html index.htm index.php;
+
+  location / {
+    proxy_pass                  http://daoxila_node_buy;
+    proxy_next_upstream         http_500 http_502 http_504 error timeout invalid_header;
+    proxy_set_header            Host            $host;
+    proxy_set_header            Proxy-Host      $proxy_host;
+    proxy_set_header            X-Forwarded-Proto $scheme;
+    proxy_pass_request_headers  on;
+  }
+}

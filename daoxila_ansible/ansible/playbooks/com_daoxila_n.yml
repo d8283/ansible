@@ -1,0 +1,6 @@
+---
+# m.daoxila.com的nginx
+- hosts: com_daoxila_n_nginx
+  roles:
+    - common_public
+    - com_daoxila_n_nginx

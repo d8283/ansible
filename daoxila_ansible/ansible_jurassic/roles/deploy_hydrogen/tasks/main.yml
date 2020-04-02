@@ -1,0 +1,27 @@
+---
+- service: name=hydrogen state=stopped
+- name: download package
+  get_url:
+    url: "http://{{ build_server }}/daoxila_greentea/latest.tgz"
+    dest: /pub/daoxila_greentea.tgz
+- name: delete old deploy
+  file:
+    path: /pub/daoxila_greentea
+    state: absent
+- shell: "tar -zxf daoxila_greentea.tgz"
+  args:
+    chdir: /pub
+- service: name=hydrogen state=started
+- file:
+    path: /pub/daoxila_greentea/hydrogen/parameters.json
+    state: link
+    src: /pub/parameters.json
+- command: npm install --production
+  args:
+    chdir: /pub/daoxila_greentea/hydrogen
+- command: node ctl.js bump-all all
+  args:
+    chdir: /pub/daoxila_greentea/hydrogen
+- file:
+    path: "/pub/daoxila_greentea.tgz"
+    state: absent

@@ -1,0 +1,7 @@
+---
+# s4.dxlfile.com的nginx
+- name: com_dxlfile_s4
+  hosts: com_dxlfile_s4_nginx
+  roles:
+    - common_public
+    - com_dxlfile_s4

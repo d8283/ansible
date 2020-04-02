@@ -1,0 +1,27 @@
+---
+- name: start apache2
+  service:
+    name: httpd
+    state: started
+    enabled: yes
+- name: daoxila_service apache virtual host conf
+  template:
+    src: apache.daoxila_service.conf.j2
+    dest: /etc/httpd/conf.d/daoxila_service.conf
+  notify: restart apache
+- file:
+    path: /www/daoxila/api/sms
+    state: directory
+    owner: nobody
+    group: nobody
+    recurse: yes
+- copy:
+    src: base_sms.php
+    dest: /www/daoxila/api/sms/
+    owner: nobody
+    group: nobody
+- copy:
+    src: put_queue.php
+    dest: /www/daoxila/api/sms/put_quene.php
+    owner: nobody
+    group: nobody

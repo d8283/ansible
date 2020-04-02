@@ -1,0 +1,8 @@
+---
+# 设置时区为上海
+- name: set timezone Shanghai
+  file:
+    state: link
+    force: true
+    src: /usr/share/zoneinfo/Asia/Shanghai
+    dest: /etc/localtime

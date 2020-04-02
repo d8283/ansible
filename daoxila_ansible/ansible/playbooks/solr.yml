@@ -1,0 +1,13 @@
+---
+# solr节点
+- name: solr instances
+  hosts: solr_cloud
+  roles:
+    - common
+    - solr_instance
+# solr负载均衡反向代理
+- name: solr nginx load balancer
+  hosts: solr_nginx
+  roles:
+    - common
+    - solr_nginx

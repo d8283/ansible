@@ -1,0 +1,22 @@
+upstream daoxila_v3 {
+{% for host in groups.daoxila_v3 %}
+  server {{ host }}:80;
+{% endfor %}
+}
+
+server {
+  listen 80;
+  server_name sys2.daoxila.com;
+
+  location / {
+    proxy_pass                  http://daoxila_v3;
+    proxy_next_upstream         http_502 http_504 error timeout invalid_header;
+    proxy_set_header Host       $host;
+    proxy_set_header            Proxy-Host $proxy_host;
+    proxy_set_header            X-Forwarded-Proto $scheme;
+    add_header                  Cache-Control no-cache;
+  }
+
+  error_log /var/log/nginx/v3-error.log;
+  access_log /var/log/nginx/v3-access.log;
+}

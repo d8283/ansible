@@ -1,0 +1,7 @@
+---
+dependencies:
+- tengine
+- role: tengine_module
+  module: ngx_http_fastcgi_module
+- php56
+- env_php

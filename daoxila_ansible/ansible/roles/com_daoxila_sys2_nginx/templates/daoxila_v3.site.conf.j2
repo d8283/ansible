@@ -1,0 +1,15 @@
+server {
+  listen 80;
+  server_name sys2.daoxila.com;
+
+  location / {
+    proxy_pass                  http://daoxila_v3;
+    proxy_next_upstream         http_502 http_504 error timeout invalid_header;
+    proxy_set_header Host       $host;
+    proxy_set_header            Proxy-Host $proxy_host;
+    add_header                  Cache-Control no-cache;
+  }
+
+  error_log /var/log/nginx/v3-error.log;
+  access_log /var/log/nginx/v3-access.log;
+}

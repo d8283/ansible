@@ -1,0 +1,30 @@
+;调试模式
+debug = 0
+;显示执行的SQL
+displaySql = 0
+;是否使用模板
+isTemplate = 1
+[application]
+;默认module
+defaultModule = User
+modules[] = 
+;数据库配置文件
+dbConfig = CONFIG_PATH "/env/db.ini"
+testDbConfig = CONFIG_PATH "/env/db_test.ini"
+;数据库表缓存目录
+dbCachePath = ROOT_PATH "/data/cache/db/"
+;router配置目录
+routerConfigPath = CONFIG_PATH "/router/"
+[phpini]
+;session配置
+session.save_handler = memcache
+session.save_path = tcp://mem-session:11216
+[smarty]
+caching = 0
+cache_lifetime = 600 ;
+template_dir = APPLICATION_PATH "/{moduleName}/Views/"
+compile_dir = ROOT_PATH "/data/cache/smarty/compile/"
+config_dir = ""
+cache_dir = ROOT_PATH "/data/cache/smarty/cache/"
+left_delimiter = "{"
+right_delimiter = "}"

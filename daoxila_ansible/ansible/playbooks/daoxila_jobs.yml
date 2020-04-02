@@ -1,0 +1,7 @@
+---
+# tools的运行环境
+- hosts: daoxila_jobs
+  roles:
+    - common
+    - nfs_client
+    - daoxila_jobs

@@ -1,0 +1,7 @@
+---
+# 安装nodejs进程管理工具pm2
+- name: install pm2
+  npm:
+    name: pm2
+    global: yes
+- command: pm2 startup centos

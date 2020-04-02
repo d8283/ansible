@@ -1,0 +1,9 @@
+---
+# 部署greentea solr core
+# 注意，这里部署的是solr core的配置，不是build程序
+- hosts:
+  - solr_cloud
+  roles:
+  - role: deploy_solr_core
+    core: greentea
+    package: solr_cloud_core_greentea

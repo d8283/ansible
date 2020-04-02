@@ -1,0 +1,14 @@
+---
+- copy:
+    src: ./
+    dest: /var/nfsshare/
+    owner: nobody
+    group: nobody
+- file:
+    state: directory
+    path: "/var/nfsshare/daoxila/v1/upload/{{ item }}/"
+    owner: nobody
+    group: nobody
+  with_items:
+    - hotel
+    - watermark

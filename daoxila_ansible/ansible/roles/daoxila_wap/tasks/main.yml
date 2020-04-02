@@ -1,0 +1,12 @@
+---
+- name: wap apache conf
+  template:
+    src: apache.wap.conf.j2
+    dest: /etc/httpd/conf.d/wap.conf
+  notify: restart apache
+- name: start apache
+  service:
+    name: httpd
+    enabled: yes
+    state: started
+    enabled: yes

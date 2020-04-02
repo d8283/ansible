@@ -1,0 +1,11 @@
+---
+- include: daoxila_v6.yml
+- include: daoxila_www.yml
+- include: daoxila_my.yml
+- include: daoxila_www_evo.yml
+- include: daoxila_v3.yml
+- include: daoxila_v5.yml
+- include: daoxila_v1_root.yml
+- include: daoxila_api.yml
+- include: daoxila_wap.yml
+- include: daoxila_service.yml

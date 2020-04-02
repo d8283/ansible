@@ -1,0 +1,35 @@
+<?php
+/**
+ * memcache配置
+ *  author luck.wang 2012.12.05
+ */
+return array(
+    'servers' => array(
+        array(
+            'host'  =>  '{{ groups.memcache|first }}',
+            'port'  =>  '11211',
+        ),
+        array(
+            'host'  =>  '{{ groups.memcache|first }}',
+            'port'  =>  '11212',
+        ),
+        array(
+            'host'  =>  '{{ groups.memcache|first }}',
+            'port'  =>  '11213',
+        ),
+        array(
+            'host'  =>  '{{ groups.memcache|first }}',
+            'port'  =>  '11214',
+        ),
+        array(
+            'host'  =>  '{{ groups.memcache|first }}',
+            'port'  =>  '11215',
+        )
+    ),
+    'persistent' => false,
+    'weight'    => 1,
+    'timeout'   => 1,
+    'retry_interval'    => 3600,
+    'status'    => true,
+    'failure_callback'  => NULL,
+);

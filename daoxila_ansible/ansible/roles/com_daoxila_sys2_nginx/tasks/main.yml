@@ -1,0 +1,15 @@
+---
+- name: add daoxila_v3 upstream
+  template:
+    src: daoxila_v3.upstream.conf.j2
+    dest: /etc/nginx/upstreams/daoxila_v3.conf
+- name: add daoxila_v3 nginx conf
+  template:
+    src: daoxila_v3.site.conf.j2
+    dest: /etc/nginx/sites-enabled/daoxila_v3.conf
+  notify: restart nginx
+- name: start nginx
+  service:
+    name: tengine
+    state: started
+    enabled: yes

@@ -1,0 +1,7 @@
+---
+# 前台nodejs的运行环境
+- name: all nodejs nodes for web
+  hosts: daoxila_node
+  roles:
+    - common
+    - daoxila_node_default

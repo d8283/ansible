@@ -1,0 +1,91 @@
+---
+# 安装solr
+- name: install unzip
+  yum:
+    name: unzip
+    state: present
+- name: create solr group
+  group:
+    name: solr
+    state: present
+- name: create solr user
+  user:
+    name: solr
+    group: solr
+    home: /opt/solr
+    createhome: no
+    shell: /sbin/nologin
+    state: present
+- name: download solr
+  command: curl -SLo /root/solr-5.2.1.tgz http://mirrors.cnnic.cn/apache/lucene/solr/5.2.1/solr-5.2.1.tgz
+  args:
+    creates: /root/solr-5.2.1.tgz
+- name: extract solr install script
+  shell: "tar xzf /root/solr-5.2.1.tgz solr-5.2.1/bin/install_solr_service.sh --strip-components=2"
+  args:
+    creates: /root/install_solr_service.sh
+- name: run solr install script
+  shell: /root/install_solr_service.sh /root/solr-5.2.1.tgz
+  args:
+    creates: /opt/solr
+- name: patch bin/solr script
+  copy:
+    src: bin_solr
+    dest: /opt/solr/bin/solr
+    owner: solr
+    group: solr
+- name: create solr home
+  file:
+    path: /opt/solr/solr_home
+    owner: solr
+    group: solr
+    state: directory
+- name: ensure solr.xml is not in solr_home
+  file:
+    path: /opt/solr/solr_home/solr.xml
+    state: absent
+- name: set up zookeeper chroot for solr
+  shell: "/opt/solr/server/scripts/cloud-scripts/zkcli.sh -zkhost {{ groups['zookeeper_ensemble']|map('str_concat', ':2181')|join(',') }} -cmd makepath /solr"
+  register: result
+  changed_when: result|success
+  failed_when: "result|failed and not 'NodeExists' in result.stderr"
+  run_once: true
+- name: upload solr.xml
+  template:
+    owner: solr
+    group: solr
+    src: solr.xml.j2
+    dest: /opt/solr/solr.xml
+  register: solrxml_changed
+- name: upload solr.xml to zookeeper
+  shell: "/opt/solr/server/scripts/cloud-scripts/zkcli.sh -zkhost {{ groups['zookeeper_ensemble']|map('str_concat', ':2181')|join(',') }} -cmd putfile /solr/solr.xml /opt/solr/solr.xml"
+  register: result
+  changed_when: result|success
+  failed_when: "result|failed and not 'NodeExists' in result.stderr"
+  run_once: true
+  when: solrxml_changed.changed
+  notify: restart solr
+- name: disable SysV script which doesn't work with ansible
+  shell: "chkconfig --list solr && chkconfig --del solr"
+  register: result
+  failed_when: False
+  changed_when: result|success
+- name: remove SysV script which doesn't work with ansible
+  file:
+    path: /etc/init.d/solr
+    state: absent
+- name: set up upstart script
+  copy:
+    src: upstart.solr.conf
+    dest: /etc/init/solr.conf
+  notify: restart solr
+- name: prepare solr.in.sh for cloud
+  template:
+    src: solr.in.sh.j2
+    dest: /opt/solr/bin/solr.in.sh
+  notify: restart solr
+- name: start solr
+  service:
+    name: solr
+    state: started
+    enabled: yes

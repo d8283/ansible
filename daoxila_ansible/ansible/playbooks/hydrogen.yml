@@ -1,0 +1,7 @@
+---
+# hydrogen的运行环境，greentea solr core builder
+- name: hydrogen
+  hosts: hydrogen
+  roles:
+  - common
+  - hydrogen

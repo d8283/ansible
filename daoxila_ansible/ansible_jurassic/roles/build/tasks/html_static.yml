@@ -1,0 +1,6 @@
+---
+- file:
+    path: "{{ workspace }}/{{ project }}/dev_html"
+    state: absent
+- name: minify
+  command: "/root/bin/mininpl {{ workspace }}/{{ project }}"

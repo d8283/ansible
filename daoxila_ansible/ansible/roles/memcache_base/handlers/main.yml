@@ -1,0 +1,5 @@
+---
+- name: restart memcached_{{ port }}
+  service:
+    name: memcached_{{ port }}
+    state: restarted

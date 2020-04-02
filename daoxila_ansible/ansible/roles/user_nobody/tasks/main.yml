@@ -1,0 +1,9 @@
+---
+# 增加一个nobody用户
+- name: create nobody user
+  user:
+    name: nobody
+    group: nobody
+    state: present
+    createhome: no
+    shell: /sbin/nologin

@@ -1,0 +1,5 @@
+upstream daoxila_greentea {
+{% for host in groups.daoxila_greentea_fpm %}
+  server {{ host }}:9001;
+{% endfor %}
+}

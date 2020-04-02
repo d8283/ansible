@@ -1,0 +1,4 @@
+---
+dependencies:
+- php56
+- env_php

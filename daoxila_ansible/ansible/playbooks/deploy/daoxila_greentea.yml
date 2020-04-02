@@ -1,0 +1,15 @@
+---
+# 部署greentea
+- hosts:
+  - daoxila_greentea_fpm
+  tasks:
+  - service: name=php-fpm state=stopped
+  - yum: name=daoxila_greentea state=latest update_cache=yes
+  - command: ./composer.phar install --prefer-dist --no-dev --no-interaction --no-ansi --no-progress --optimize-autoloader
+    args:
+      chdir: /www/daoxila/daoxila_greentea
+    environment:
+        SYMFONY_ENV: prod
+  - file: path=/www/daoxila/daoxila_greentea owner=nobody group=nobody state=directory recurse=yes
+  - service: name=php-fpm state=started
+  serial: "30%"

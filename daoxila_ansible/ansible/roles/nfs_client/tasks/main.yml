@@ -1,0 +1,11 @@
+---
+- file:
+    path: /NFS
+    state: directory
+    owner: nobody
+    group: nobody
+- mount:
+    name: /NFS
+    src: "{{ groups.nfs_server|first }}:/var/nfsshare"
+    state: mounted
+    fstype: nfs

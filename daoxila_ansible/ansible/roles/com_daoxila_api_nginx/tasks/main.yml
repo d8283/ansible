@@ -1,0 +1,12 @@
+---
+# api.daoxila.com的nginx配置
+- name: add api_daoxila_com nginx conf
+  template:
+    src: nginx.api_daoxila_com.conf.j2
+    dest: /etc/nginx/sites-enabled/api_daoxila_com.conf
+  notify: reload nginx
+- name: start tengine
+  service:
+    name: tengine
+    state: started
+    enabled: yes

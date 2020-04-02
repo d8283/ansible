@@ -1,0 +1,8 @@
+---
+# 部署代码daoxila_node_*
+- hosts:
+  - daoxila_node
+  roles:
+  - role: deploy_daoxila_node
+    name: "{{ project }}"
+  serial: "30%"

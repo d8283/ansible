@@ -1,0 +1,23 @@
+---
+- assert:
+    that: package != ''
+- assert: 
+    that: core != ''
+- yum: "name={{ package }} state=latest update_cache=yes"
+  run_once: true
+  register: update_config
+- command: "./server/scripts/cloud-scripts/zkcli.sh -zkhost {{ groups['zookeeper_ensemble']|map('str_concat', ':2181')|join(',') }}/solr -cmd upconfig -confname {{ core }} -confdir /opt/solr/configsets/{{ core }}"
+  args:
+    chdir: /opt/solr
+  run_once: true
+  when: update_config.changed
+- command: "curl 'localhost:8983/solr/admin/collections?action=list&wt=json'"
+  register: collection_created
+  changed_when: False
+  run_once: true
+- command: "curl 'localhost:8983/solr/admin/collections?action=create&wt=json&name={{ core }}&numShards=1&replicationFactor={{ groups['solr_cloud']|length }}&collection.configName={{ core }}'"
+  when: "not '{{ core }}' in collection_created.stdout"
+  run_once: true
+- command: "curl 'localhost:8983/solr/admin/collections?action=reload&wt=json&name={{ core }}'"
+  when: update_config.changed
+  run_once: true

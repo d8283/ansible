@@ -1,0 +1,10 @@
+---
+# dnsmasq服务，用于服务器间互相访问
+- hosts: dnsmasq
+  roles:
+    - yum_aliyun
+    - timezone_shanghai
+    - disable_iptables
+    - disable_postfix
+    - ntp_client
+    - dnsmasq

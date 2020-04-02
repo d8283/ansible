@@ -1,0 +1,33 @@
+<VirtualHost *:80>
+    DocumentRoot "/www/daoxila/daoxila_service/public"
+    ServerName service.daoxila.com
+    Header add ServerID "api-{{ inventory_hostname|ipaddr('int') % 256 }}"
+
+    Alias /sms /www/daoxila/api/sms
+    Alias /log /www/daoxila/api/log
+
+    CustomLog /var/log/httpd/daoxila_service-access.log combined
+    ErrorLog /var/log/httpd/daoxila_service-error.log
+
+    SetEnv ENV_PATH /etc/daoxila/Env.php
+
+    <Directory "/www/daoxila/daoxila_service/public">
+        Options -Indexes
+        DirectoryIndex index.html index.htm default.htm index.php
+        AllowOverride All
+
+        Order allow,deny
+#       Allow from 220.181.165.0/24 61.135.165.0/24 116.231.16.0/24
+        Allow from all
+    </Directory>
+
+    <Directory "/www/daoxila/api/sms">
+        Order allow,deny
+        Allow from 192.168.0.0/16
+    </Directory>
+
+    <Directory "/www/daoxila/api/log">
+        Order allow,deny
+        Allow from 192.168.0.0/16
+    </Directory>
+</VirtualHost>

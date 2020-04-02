@@ -1,0 +1,10 @@
+---
+- hosts: daoxila_v6
+  roles:
+  - role: deploy_php
+    project: daoxila_v6
+    load_balance: tengine
+  serial: 1
+- hosts: daoxila_v6_jobs
+  roles:
+  - deploy_v6_jobs

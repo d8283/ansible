@@ -1,0 +1,14 @@
+---
+# daoxila_v5的负载均衡反向代理
+- name: nginx for daoxila_v5
+  hosts: com_daoxila_cms2_nginx
+  roles:
+    - common_public
+    - com_daoxila_cms2_nginx
+# daoxila_v5的运行环境
+- name: daoxila_v5
+  hosts: daoxila_v5
+  roles:
+    - common
+    - nfs_client
+    - daoxila_v5

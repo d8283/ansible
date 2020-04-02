@@ -1,0 +1,41 @@
+---
+- template:
+    src: v6_job.conf.j2
+    dest: "/etc/init/{{ item.name }}.conf"
+  with_items: "{{ v6_jobs }}"
+- name: download package
+  get_url:
+    url: "http://{{ build_server }}/{{ project }}/latest.tgz"
+    dest: "{{ project_root }}/{{ project }}.tgz"
+- service:
+    name: "{{ item.name }}"
+    state: stopped
+  with_items: "{{ v6_jobs }}"
+- shell: "if [ -d {{ project_root }}/{{ project }}/app/logs ]; then mv {{ project_root }}/{{ project }}/app/logs {{ project_root }}/{{ project }}_app_logs; fi"
+- name: delete old deploy
+  file:
+    path: "{{ project_root }}/{{ project }}"
+    state: absent
+- shell: "tar -zxf {{ project }}.tgz"
+  args:
+    chdir: "{{ project_root }}"
+- file:
+    path: "{{ project_root }}/{{ project }}.tgz"
+    state: absent
+- shell: "if [ -d {{ project_root }}/{{ project }}_app_logs ]; then mv {{ project_root }}/{{ project }}_app_logs/* {{ project_root }}/{{ project }}/app/logs; rm -rf {{ project_root }}/{{ project }}_app_logs ]; fi"
+- command: "{{ php_bin }} ./composer.phar install --no-dev --no-dev --no-ansi --no-interaction --no-progress --optimize-autoloader --prefer-dist"
+  args:
+    chdir: "{{ project_root }}/{{ project }}"
+  environment:
+    ENV_PATH: "{{ env_path }}"
+    SYMFONY_ENV: prod
+- file:
+    path: "{{ project_root }}/{{ project }}"
+    state: directory
+    owner: "root"
+    group: "root"
+    recurse: yes
+- service:
+    name: "{{ item.name }}"
+    state: started
+  with_items: "{{ v6_jobs }}"

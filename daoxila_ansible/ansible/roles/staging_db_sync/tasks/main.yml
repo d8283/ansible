@@ -1,0 +1,23 @@
+---
+- yum:
+    name: ruby
+    state: present
+- yum:
+    name: mysql-community-client
+    state: present
+- file:
+    path: /root/dbsync
+    state: directory
+- file:
+    path: /root/dbsync/tmp
+    state: absent
+- file:
+    path: /root/dbsync/tmp
+    state: directory
+- template:
+    src: dbsync.yml.j2
+    dest: /root/dbsync/dbsync.yml
+- copy:
+    src: dbsync.rb
+    dest: /root/dbsync/dbsync.rb
+- command: "ruby /root/dbsync/dbsync.rb"

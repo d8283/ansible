@@ -1,0 +1,10 @@
+---
+- assert:
+    that: solr_core != ''
+- service: name=hydrogen state=stopped
+- yum: name=hydrogen state=latest update_cache=yes
+- template: src=parameters.json.j2 dest=/opt/hydrogen/parameters.json
+- service: name=hydrogen state=started
+- shell: "sleep 5 && node ctl.js bump-all all"
+  args:
+    chdir: /opt/hydrogen

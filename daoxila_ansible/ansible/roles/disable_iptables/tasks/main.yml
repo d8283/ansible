@@ -1,0 +1,12 @@
+---
+- command: "cat /etc/ansible_conflict_iptables"
+  failed_when: False
+  changed_when: False
+  register: conflict
+- assert:
+    that: "conflict.rc != 0 or conflict.stdout == '{{ role_path|basename }}'"
+- name: disable iptables
+  service: name=iptables state=stopped enabled=no
+- copy:
+    dest: /etc/ansible_conflict_iptables
+    content: "{{ role_path|basename }}"

@@ -1,0 +1,4 @@
+---
+- include: daoxila_node.yml
+  vars:
+    project: daoxila_node_wedding

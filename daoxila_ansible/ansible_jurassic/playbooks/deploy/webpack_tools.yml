@@ -1,0 +1,4 @@
+---
+- include: webpack.yml
+  vars:
+    project: webpack_tools

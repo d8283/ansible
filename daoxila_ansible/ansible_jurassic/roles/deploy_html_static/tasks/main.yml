@@ -1,0 +1,29 @@
+---
+- name: check necessary variables
+  assert:
+    that: project != ''
+- name: download package
+  get_url:
+    url: "http://{{ build_server }}/{{ project }}/latest.tgz"
+    dest: "{{ project_root }}/{{ project }}.tgz"
+- shell: "tar -zxf {{ project }}.tgz"
+  args:
+    chdir: "{{ project_root }}"
+- file:
+    path: "{{ project_root }}/{{ project }}.tgz"
+    state: absent
+- file:
+    path: "{{ project_root }}/{{ project }}"
+    state: directory
+    owner: "{{ project_owner }}"
+    group: "{{ project_group }}"
+    recurse: yes
+- set_fact:
+    project_target: "{{ project_root }}/{{ project|str_substr(12) }}"
+    project_full: "{{ project_root }}/{{ project }}"
+- set_fact:
+    project_tmp: "{{ project_target }}_old"
+- shell: "mv {{ project_target }} {{ project_tmp }}; mv {{ project_full }} {{ project_target }}"
+- file:
+    path: "{{ project_tmp }}"
+    state: absent

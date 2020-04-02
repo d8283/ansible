@@ -1,0 +1,133 @@
+; --- 默认读取的数据库 ---
+default_db                      = main
+[main]
+; --- 开启读写分离  ---
+enable_w_r                  = 1
+; --- 主库配置 ---
+master['driver']            = Pdo_Mysql
+master['host']              = sql-master
+master['port']              = 3306
+master['username']          = {{ mysql_master_user }}
+master['password']          = {{ mysql_master_pass }}
+master['dbname']            = dxl_exodus
+master['persistent']        = false
+master['characterset']      = utf8
+
+; --- 从库配置 ---
+slave['driver']             = Pdo_Mysql
+slave['host']               = sql-slave
+slave['port']               = 3306
+slave['username']           = {{ mysql_slave_user }}
+slave['password']           = {{ mysql_slave_pass }}
+slave['dbname']             = dxl_exodus
+slave['persistent']         = false
+slave['characterset']       = utf8
+
+[api]
+; --- 开启读写分离  ---
+enable_w_r                  = 0
+; --- 主库配置 ---
+master['driver']            = Pdo_Mysql
+master['host']              = sql-master
+master['port']              = 3306
+master['username']          = {{ mysql_master_user }}
+master['password']          = {{ mysql_master_pass }}
+master['dbname']            = api
+master['persistent']        = false
+master['characterset']      = utf8
+
+[coupon]
+; --- 开启读写分离 ---
+enable_w_r = 0
+; --- 主库配置 ---
+master['driver'] = Pdo_Mysql
+master['host'] = sql-master
+master['port'] = 3306
+master['username'] = {{ mysql_master_user }}
+master['password'] = {{ mysql_master_pass }}
+master['dbname'] = 'dxl_coupon'
+master['persistent'] = false
+master['characterset'] = utf8
+
+[bbsUltrax]
+enable_w_r                                      = 0
+master['driver']                        = Pdo_Mysql
+master['host']                          = sql-master
+master['port']                          = 3306
+master['username']                      = {{ mysql_master_user }}
+master['password']                      = {{ mysql_master_pass }}
+master['dbname']                        = bbs
+master['persostent']            = false
+master['characterset']          = utf8
+
+[pay]
+enable_w_r                                      = 0
+master['driver']                        = Pdo_Mysql
+master['host']                          = sql-master
+master['port']                          = 3306
+master['username']                      = {{ mysql_master_user }}
+master['password']                      = {{ mysql_master_pass }}
+master['dbname']                        = dxl_pay
+master['persistent']            = false
+master['characterset']          = utf8
+
+[feast]
+enable_w_r = DB_RW_OFF
+master['host'] = DB_FEAST_MASTER_HOST
+master['username'] = DB_FEAST_MASTER_USER
+master['password'] = DB_FEAST_MASTER_PWD
+master['dbname'] = DB_FEAST_DBNAME
+master['port'] = 3306
+master['characterset'] = utf8
+master['db_type'] = Pdo
+master['persistent'] = false
+
+[wedding]
+enable_w_r = DB_RW_OFF
+master['host'] = DB_WEDDING_MASTER_HOST
+master['username'] = DB_WEDDING_MASTER_USER
+master['password'] = DB_WEDDING_MASTER_PWD
+master['dbname'] = DB_WEDDING_DBNAME
+master['port'] = 3306
+master['characterset'] = utf8
+master['db_type'] = Pdo
+master['persistent'] = false
+
+[interactive]
+; --- 开启读写分离  ---
+enable_w_r                  = 0
+; --- 主库配置 ---
+master['driver']            = Pdo_Mysql
+master['host']              = DB_INTERACTIVE_MASTER_HOST
+master['port']              = 3306
+master['username']      = DB_INTERACTIVE_MASTER_USER
+master['password']      = DB_INTERACTIVE_MASTER_PWD
+master['dbname']        = DB_INTERACTIVE_DBNAME
+master['persistent']        = false
+master['characterset']      = utf8
+
+[ceremony]
+; --- 开启读写分离  ---
+enable_w_r                  = 0
+; --- 主库配置 ---
+master['driver']            = Pdo_Mysql
+master['host']              = DB_CEREMONY_MASTER_HOST
+master['port']              = 3306
+master['username']      = DB_CEREMONY_MASTER_USER
+master['password']      = DB_CEREMONY_MASTER_PWD
+master['dbname']        = DB_CEREMONY_DBNAME
+master['persistent']        = false
+master['characterset']      = utf8
+
+[cer]
+; --- ?~@?~P?读?~F~Y?~H~F离  ---
+enable_w_r                                      = 0
+; --- 主?~S?~E~M置 ---
+master['driver']                        = Pdo_Mysql
+master['host']                          = DB_CEREMONY_MASTER_HOST
+master['port']                          = 3306
+master['username']              = DB_CEREMONY_MASTER_USER
+master['password']              = DB_CEREMONY_MASTER_PWD
+master['dbname']                = DB_CEREMONY_DBNAME
+master['persistent']            = false
+master['characterset']          = utf8

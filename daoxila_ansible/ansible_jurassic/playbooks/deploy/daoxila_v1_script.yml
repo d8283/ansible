@@ -1,0 +1,4 @@
+---
+- hosts: html_static
+  roles:
+  - role: deploy_v1_script

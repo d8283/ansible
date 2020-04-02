@@ -1,0 +1,12 @@
+---
+- name: add v5 nginx conf
+  template:
+    src: daoxila_v5.site.conf.j2
+    dest: /etc/nginx/sites-enabled/daoxila_v5.conf
+  notify: restart nginx
+- name: start nginx
+  service:
+    name: tengine
+    state: started
+    enabled: yes
+

@@ -1,0 +1,4 @@
+---
+- hosts: html_static
+  roles:
+  - role: deploy_html_static

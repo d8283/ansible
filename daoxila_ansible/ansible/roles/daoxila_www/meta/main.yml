@@ -1,0 +1,4 @@
+---
+dependencies:
+- php53
+- env_php

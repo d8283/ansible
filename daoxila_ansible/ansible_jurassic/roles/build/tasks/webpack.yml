@@ -1,0 +1,12 @@
+---
+- command: npm install
+  args:
+    chdir: "{{ workspace }}/{{ project }}"
+- command: node node_modules/webpack/bin/webpack.js
+  args:
+    chdir: "{{ workspace }}/{{ project }}"
+- command: "mv {{ workspace }}/{{ project }} {{ workspace }}/{{ project }}_tmp"
+- command: "mv {{ workspace }}/{{ project }}_tmp/build {{ workspace }}/{{ project }}"
+- file:
+    path: "{{ workspace }}/{{ project }}_tmp"
+    state: absent

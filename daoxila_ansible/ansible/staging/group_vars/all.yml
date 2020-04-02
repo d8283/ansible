@@ -1,0 +1,42 @@
+---
+mysql_user: staging
+mysql_pass: staging
+mysql_master_user: staging
+mysql_master_pass: staging
+mysql_slave_user: staging_read
+mysql_slave_pass: staging_read
+sync_slave_host: 192.168.10.81
+sync_slave_user: dump
+sync_slave_pass: dumpthisb*tch
+sync_newdb_host: 192.168.10.81
+sync_newdb_user: dump
+sync_newdb_pass: dumpthisb*tch
+sync_logdb_host: 192.168.10.100
+sync_logdb_user: log_user
+sync_logdb_pass: pGlyL27l6OpW
+sync_bbs_host: 192.168.10.121
+sync_bbs_user: dump
+sync_bbs_pass: dumpthisb*tch
+rabbitmq_user: admin
+rabbitmq_pass: admin
+
+qiniu:
+  buckets:
+    image_hunche:
+      key: dxl-image-hunche
+      url: http://7xluhs.com2.z0.glb.qiniucdn.com/
+    audio:
+      key: dxl-audio
+      url: http://7xkptf.media1.z0.glb.clouddn.com/
+    binary:
+      key: dxl-binary
+      url: http://7xkpto.dl1.z0.glb.clouddn.com/
+    image:
+      key: dxl-image
+      url: http://7xkptw.com2.z0.glb.qiniucdn.com/
+    vframe:
+      key: dxl-vframe
+      url: http://7xlct8.com2.z0.glb.qiniucdn.com/
+    video:
+      key: dxl-video
+      url: http://7xkpu7.media1.z0.glb.clouddn.com/

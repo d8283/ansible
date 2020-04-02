@@ -1,0 +1,3 @@
+---
+- name: reload iptables
+  command: service iptables reload

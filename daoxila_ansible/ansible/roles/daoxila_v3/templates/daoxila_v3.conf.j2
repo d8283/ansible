@@ -1,0 +1,21 @@
+<VirtualHost *:80>
+    DocumentRoot "/www/daoxila/daoxila_v3/public"
+    ServerAdmin server@daoxila.com
+    ServerName sys2.daoxila.com
+
+    CustomLog /var/log/httpd/daoxila_v3-access.log combined
+    ErrorLog /var/log/httpd/daoxila_v3-error.log
+
+    Header add ServerID "v3-{{ inventory_hostname|ipaddr('int') % 256 }}"
+
+    SetEnv ENV_PATH /etc/daoxila/Env.php
+
+</VirtualHost>
+
+<Directory "/www/daoxila/daoxila_v3/public">
+    Options -Indexes
+    DirectoryIndex index.html index.htm default.htm index.php
+    AllowOverride All
+    Order Deny,Allow
+    Allow from all
+</Directory>

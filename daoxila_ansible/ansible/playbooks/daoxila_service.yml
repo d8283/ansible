@@ -1,0 +1,14 @@
+---
+# daoxila_service的负载均衡反向代理
+- name: nginx for daoxila_service
+  hosts: daoxila_service_nginx
+  roles:
+    - common
+    - daoxila_service_nginx
+# daoxila_service的运行环境
+- name: daoxila_service
+  hosts: daoxila_service
+  roles:
+    - common
+    - nfs_client
+    - daoxila_service

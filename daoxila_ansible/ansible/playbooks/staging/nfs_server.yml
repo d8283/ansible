@@ -1,0 +1,6 @@
+---
+- hosts: nfs_server
+  roles:
+    - common
+    - nfs_server
+    - nfs_content

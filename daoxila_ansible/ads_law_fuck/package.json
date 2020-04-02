@@ -1,0 +1,7 @@
+{
+    "dependencies": {
+        "co": "*",
+        "solr-client": "*",
+        "to-csv": "*"
+    }
+}

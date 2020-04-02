@@ -1,0 +1,5 @@
+---
+project_root: /pub/s5/build
+project_root_prepare: /pub/s5/prepare
+project_owner: nobody
+project_group: nobody

@@ -1,0 +1,5 @@
+---
+# 使用aliyun的yum镜像
+- hosts: all
+  roles:
+  - yum_aliyun

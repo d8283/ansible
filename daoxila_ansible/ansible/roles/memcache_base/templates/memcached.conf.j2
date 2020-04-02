@@ -1,0 +1,8 @@
+description "Memcached on Port {{ port }}"
+
+start on filesystem or runlevel [2345]
+stop on shutdown
+
+exec memcached -u memcached -p {{ port }}
+respawn
+respawn limit 5 60

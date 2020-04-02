@@ -1,0 +1,55 @@
+{
+    "solr-host": "solr.daoxila.org",
+    "solr-port": 8983,
+    "solr-core": "greentea",
+
+    "db-main-host": "{{ groups.mysql_master|first }}",
+    "db-main-user": "{{ mysql_user }}",
+    "db-main-pass": "{{ mysql_pass }}",
+    "db-main-name": "dxl_exodus",
+
+    "db-photo-host": "{{ groups.mysql_master|first }}",
+    "db-photo-user": "{{ mysql_user }}",
+    "db-photo-pass": "{{ mysql_pass }}",
+    "db-photo-name": "dxl_wedding",
+
+    "db-feast-host": "{{ groups.mysql_master|first }}",
+    "db-feast-user": "{{ mysql_user }}",
+    "db-feast-pass": "{{ mysql_pass }}",
+    "db-feast-name": "dxl_feast",
+
+    "db-pub-host": "{{ groups.mysql_master|first }}",
+    "db-pub-user": "{{ mysql_user }}",
+    "db-pub-pass": "{{ mysql_pass }}",
+    "db-pub-name": "dxl_pub",
+
+    "db-coupon-host": "{{ groups.mysql_master|first }}",
+    "db-coupon-user": "{{ mysql_user }}",
+    "db-coupon-pass": "{{ mysql_pass }}",
+    "db-coupon-name": "dxl_coupon",
+
+    "db-ceremony-host": "{{ groups.mysql_master|first }}",
+    "db-ceremony-user": "{{ mysql_user }}",
+    "db-ceremony-pass": "{{ mysql_pass }}",
+    "db-ceremony-name": "dxl_ceremony",
+
+    "db-interactive-host": "{{ groups.mysql_master|first }}",
+    "db-interactive-user": "{{ mysql_user }}",
+    "db-interactive-pass": "{{ mysql_pass }}",
+    "db-interactive-name": "dxl_interactive",
+
+    "db-pay-host": "{{ groups.mysql_master|first }}",
+    "db-pay-user": "{{ mysql_user }}",
+    "db-pay-pass": "{{ mysql_pass }}",
+    "db-pay-name": "dxl_pay",
+
+    "amqp-user": "{{ rabbitmq_user }}",
+    "amqp-pass": "{{ rabbitmq_pass }}",
+    "amqp-ip": "{{ groups.rabbitmq|first }}",
+    "amqp-port": 5672,
+    "amqp-queue": "main_topic_queue",
+
+    "redis-host": "{{ groups.redis|first }}",
+
+    "hunqing-api": "http://v6.daoxila.org"
+}

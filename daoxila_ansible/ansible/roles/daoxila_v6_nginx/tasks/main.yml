@@ -1,0 +1,16 @@
+---
+- name: add v6 upstream
+  template:
+    src: daoxila_v6.upstream.conf.j2
+    dest: /etc/nginx/upstreams/daoxila_v6.conf
+  notify: restart nginx
+- name: add v6 nginx conf
+  template:
+    src: daoxila_v6.site.conf.j2
+    dest: /etc/nginx/sites-enabled/daoxila_v6.conf
+  notify: restart nginx
+- name: start nginx
+  service:
+    name: tengine
+    state: started
+    enabled: yes

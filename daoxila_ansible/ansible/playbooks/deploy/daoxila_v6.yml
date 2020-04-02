@@ -1,0 +1,7 @@
+---
+# 部署daoxila_v6
+- hosts:
+    - daoxila_v6_fpm
+  roles:
+    - deploy_daoxila_v6
+  serial: "30%"

@@ -1,0 +1,14 @@
+---
+- file:
+    path: /pub/webnode
+    state: directory
+    owner: nobody
+    group: nobody
+- name: create log dir
+  file:
+    path: /pub/webnode/logs
+    state: directory
+    owner: nobody
+    group: nobody
+- template: src=nodeServer.json.j2 dest=/pub/webnode/nodeServer.json
+  notify: pm2 restart all

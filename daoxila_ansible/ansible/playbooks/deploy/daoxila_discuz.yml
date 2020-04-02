@@ -1,0 +1,10 @@
+---
+# 部署daoxila_discuz
+- hosts:
+  - daoxila_discuz
+  tasks:
+  - service: name=httpd state=stopped
+  - yum: name=daoxila_discuz state=latest update_cache=yes
+  - file: path=/www/daoxila/daoxila_discuz owner=apache group=apache state=directory recurse=yes
+  - service: name=httpd state=started
+  serial: "30%"

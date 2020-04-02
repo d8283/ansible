@@ -1,0 +1,18 @@
+if [ `rabbitmq-plugins list -e rabbitmq_management | grep rabbitmq_management | wc -l ` -eq 0 ]; then
+    rabbitmq-plugins enable rabbitmq_management
+    service rabbitmq-server restart
+else
+    service rabbitmq-server start
+fi
+while [ `netstat -plnt | grep :5672 | wc -l` != "1" ]; do sleep 1; done
+while [ `netstat -plnt | grep :15672 | wc -l` != "1" ]; do sleep 1; done
+if [ `rabbitmqctl list_users | awk '{print $1}' | grep admin | wc -l` -eq 0 ]; then
+    rabbitmqctl add_user {{ rabbitmq_user }} {{ rabbitmq_pass }}
+    rabbitmqctl set_permissions {{ rabbitmq_user }} ".*" ".*" ".*"
+    rabbitmqctl set_user_tags {{ rabbitmq_user }} administrator
+fi
+if [ ! -f /usr/sbin/rabbitmqadmin ]; then
+    curl http://localhost:15672/cli/rabbitmqadmin > /usr/sbin/rabbitmqadmin
+    chmod +x /usr/sbin/rabbitmqadmin
+fi
+rabbitmqadmin -H localhost -u {{ rabbitmq_user }} -p {{ rabbitmq_user }} declare exchange name=main_topic_queue type=topic

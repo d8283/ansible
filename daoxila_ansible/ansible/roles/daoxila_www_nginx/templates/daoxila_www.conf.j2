@@ -1,0 +1,21 @@
+upstream daoxila_www {
+{% for host in groups['daoxila_www'] %}
+  server {{ host }}:80;
+{% endfor %}
+}
+
+server {
+  listen 80;
+  server_name www.daoxila.dev;
+
+  location / {
+    proxy_pass                  http://daoxila_www;
+    proxy_next_upstream         http_502 http_504 error timeout invalid_header;
+    proxy_set_header Host       $host;
+    proxy_set_header            Proxy-Host $proxy_host;
+    proxy_set_header            X-Forwarded-Proto $scheme;
+  }
+
+  error_log /var/log/nginx/daoxila_www-error.log;
+  access_log /var/log/nginx/daoxila_www-access.log;
+}

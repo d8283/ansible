@@ -1,0 +1,7 @@
+---
+# mongodb服务
+- name: install mongodb
+  hosts: mongodb
+  roles:
+    - common
+    - mongodb

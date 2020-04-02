@@ -1,0 +1,15 @@
+server {
+  listen 80;
+  server_name s4.dxlfile.com;
+
+  root /www/daoxila/;
+
+  location / {
+    concat on;
+    concat_max_files 30;
+    concat_types text/css application/javascript;
+  }
+
+  error_log /var/log/nginx/html_static-error.log;
+  access_log /var/log/nginx/html_static-access.log;
+}

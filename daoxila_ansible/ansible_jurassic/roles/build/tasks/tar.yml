@@ -1,0 +1,11 @@
+---
+- name: make tar
+  command: "tar -zcf {{ build_output }}/{{ project }}_{{ tag|sanitize_tag_name }}.tgz {{ project }}"
+  args:
+    chdir: "{{ workspace }}"
+- name: make sure release folder exist
+  file:
+    path: "{{ release_output }}/{{ project }}"
+    state: directory
+- name: mv tar to release folder
+  command: "mv {{ build_output }}/{{ project }}_{{ tag|sanitize_tag_name }}.tgz {{ release_output }}/{{ project }}/{{ tag|sanitize_tag_name }}.tgz"

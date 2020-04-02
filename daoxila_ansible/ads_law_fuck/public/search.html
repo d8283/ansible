@@ -1,0 +1,75 @@
+<html>
+<head>
+<script type="application/javascript" src="/all.js"></script>
+<script>
+var keywordSearch = new KeywordSearch(),
+    currentPage = 1;
+
+function onSearch() {
+    var keyword = document.getElementById('keyword').value;
+
+    if (!keyword.length) {
+        result.innerHTML = '关键字不能为空';
+        return;
+    }
+
+    keywordSearch.search(keyword, currentPage);
+}
+
+function prevPage() {
+    if (!keywordSearch.lastResult) {
+        return;
+    }
+
+    currentPage = Math.max(1, currentPage - 1);
+    onSearch();
+}
+
+function nextPage() {
+    if (!keywordSearch.lastResult) {
+        return;
+    }
+
+    currentPage = Math.min(keywordSearch.lastResult.pages, currentPage + 1);
+    currentPage = Math.max(1, currentPage);
+    onSearch();
+}
+
+
+window.onload = function () {
+    keywordSearch.on('result', function (result) {
+        document.getElementById('result').innerHTML = renderDocs(result.docs);
+        document.getElementById('page').innerHTML = result.page;
+        document.getElementById('pages').innerHTML = result.pages;
+        currentPage = result.page;
+    });
+}
+
+function exportCSV() {
+    var keyword = document.getElementById('keyword').value;
+    if (!keyword.length) {
+        result.innerHTML = '关键字不能为空';
+        return;
+    }
+    window.open('/export.csv?keyword=' + keyword);
+}
+</script>
+<style>
+#result em {
+    color: red;
+}
+</style>
+</head>
+<body>
+<form onsubmit="currentPage = 1;onSearch();return false;">
+关键字: <input id="keyword" value="" />
+<input type="submit" value="搜索" />
+<input id="prev-page" type="button" onclick="prevPage()" value="上一页" />
+<input id="next-page" type="button" onclick="nextPage()" value="下一页" />
+第<span id="page" style="border: 1px solid #aaa;padding:0 5px 0 5px;"></span>页
+共<span id="pages" style="border: 1px solid #aaa;padding:0 5px 0 5px;"></span>页
+<button onclick="exportCSV()">导出</button>
+</form>
+<div id="result"></div>
+</body>
+</html>

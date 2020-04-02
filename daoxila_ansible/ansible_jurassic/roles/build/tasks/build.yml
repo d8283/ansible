@@ -1,0 +1,15 @@
+---
+- include: svn_export.yml
+- include: symfony2.yml
+  when: project == 'daoxila_greentea' or project == 'daoxila_v6' or project == 'daoxila_v7'
+- include: hydrogen.yml
+  when: project == 'daoxila_greentea'
+- include: html_static.yml
+  when: "project|str_substr(0, 11) == 'html_static'"
+- include: node.yml
+  when: "project|str_substr(0, 12) == 'daoxila_node'"
+- include: webpack.yml
+  when: "project|str_substr(0, 7) == 'webpack'"
+- include: daoxila_lib.yml
+  when: "project == 'daoxila_lib'"
+- include: tar.yml

@@ -1,0 +1,11 @@
+---
+# 限制到公网端口源IP，只接受来自指定源IP的包
+# 接受一个allow_ip参数，格式为IP地址的数组
+- service:
+    name: iptables
+    state: started
+    enabled: yes
+- template:
+    src: iptables-save.txt.j2
+    dest: /etc/sysconfig/iptables
+  notify: reload iptables

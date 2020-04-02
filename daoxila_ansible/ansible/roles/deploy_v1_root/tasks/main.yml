@@ -1,0 +1,10 @@
+---
+- service: name=httpd state=stopped
+- yum: name=daoxila_v1_root state=latest update_cache=yes
+- file: path=/www/daoxila/daoxila_v1_root owner=nobody group=nobody state=directory recurse=yes
+- template: src=application.ini.j2 dest=/www/daoxila/daoxila_v1_root/application/configs/application.ini
+- template: src=Server.php.j2 dest=/www/daoxila/daoxila_v1_root/library/Ext/Server.php
+- yum: name=daoxila_lib state=latest update_cache=yes
+- file: path=/www/daoxila/daoxila_lib owner=nobody group=nobody state=directory recurse=yes
+- file: path=/www/daoxila/library state=link src=daoxila_lib
+- service: name=httpd state=started

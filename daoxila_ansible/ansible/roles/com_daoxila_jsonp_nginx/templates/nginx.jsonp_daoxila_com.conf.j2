@@ -1,0 +1,54 @@
+server {
+  listen       80;
+  listen       443 ssl;
+  server_name  jsonp.daoxila.com ;
+
+  ssl                       on;
+  ssl_certificate           /etc/nginx/daoxila/daoxila_com.cer;
+  ssl_certificate_key       /etc/nginx/daoxila/daoxila_com.key;
+  ssl_protocols             SSLv3 TLSv1 TLSv1.1 TLSv1.2;
+  ssl_ciphers               HIGH:!aNULL:!MD5;
+  ssl_prefer_server_ciphers on;
+
+  location /jsonpnew {
+    proxy_pass                  http://{{ groups.daoxila_www_evo_nginx|first }};
+    proxy_next_upstream         http_502 http_504 error timeout invalid_header;
+    proxy_set_header            Host            shanghai.daoxila.com;
+    proxy_set_header            Proxy-Host      $proxy_host;
+    proxy_set_header            X-Forwarded-Proto $scheme;
+    proxy_pass_request_headers  on;
+  }
+
+  location /jsonp {
+    proxy_pass                  http://daoxila_v1_root;
+    proxy_next_upstream         http_500 http_502 http_504 error timeout invalid_header;
+    proxy_set_header            Host            $host;
+    proxy_set_header            Proxy-Host      $proxy_host;
+    proxy_set_header            X-Forwarded-Proto $scheme;
+    proxy_pass_request_headers  on;
+  }
+
+  location /event/jsonp {
+    proxy_pass                  http://daoxila_v1_root;
+    proxy_next_upstream         http_502 http_504 error timeout invalid_header;
+    proxy_set_header            Host            www.daoxila.com;
+    proxy_set_header            Proxy-Host      $proxy_host;
+    proxy_set_header            X-Forwarded-Proto $scheme;
+    proxy_pass_request_headers  on;
+  }
+
+  location / {
+    return 404;
+  }
+
+  location /crossdomain.xml {
+    root                        /www/daoxila/daoxila_com;
+  }
+
+  location /uploadify.swf {
+    root                        /www/daoxila/uploadify;
+  }
+
+  error_log /var/log/nginx/com_daoxila-error.log;
+  access_log /var/log/nginx/com_daoxila-access.log;
+}

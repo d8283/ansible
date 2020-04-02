@@ -1,0 +1,5 @@
+---
+- hosts:
+  - com_daoxila_event_nginx
+  roles:
+  - deploy_daoxila_event

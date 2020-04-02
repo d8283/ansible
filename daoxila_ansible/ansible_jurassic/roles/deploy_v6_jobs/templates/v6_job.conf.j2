@@ -1,0 +1,12 @@
+description "{{ item.name }}"
+
+start on filesystem or runlevel [2345]
+stop on shutdown
+
+env ENV_PATH="{{ env_path }}"
+
+exec /usr/local/server/php/bin/php -f /www/daoxila/daoxila_v6/app/console {{ item.args }} -e=prod >> /tmp/{{ item.name }} 2>&1
+
+kill timeout 60
+
+respawn

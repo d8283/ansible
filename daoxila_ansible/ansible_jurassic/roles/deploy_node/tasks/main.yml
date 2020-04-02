@@ -1,0 +1,28 @@
+---
+- name: check necessary variables
+  assert:
+    that: project != ''
+- name: download package
+  get_url:
+    url: "http://{{ build_server }}/{{ project }}/latest.tgz"
+    dest: "{{ project_root }}/{{ project }}.tgz"
+- name: delete old deploy
+  file:
+    path: "{{ project_root }}/{{ project }}"
+    state: absent
+- shell: "tar -zxf {{ project }}.tgz"
+  args:
+    chdir: "{{ project_root }}"
+- file:
+    path: "{{ project_root }}/{{ project }}.tgz"
+    state: absent
+- file:
+    path: "{{ project_root }}/{{ project }}"
+    state: directory
+    owner: "{{ project_owner }}"
+    group: "{{ project_group }}"
+    recurse: yes
+- include: pm2_app.yml
+  when: project != 'node_modules'
+- include: node_modules.yml
+  when: project == 'node_modules'

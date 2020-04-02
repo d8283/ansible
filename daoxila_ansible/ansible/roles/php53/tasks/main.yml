@@ -1,0 +1,44 @@
+---
+# 安装PHP 5.3和扩展
+# - name: install php53
+#   yum:
+#     name: php
+#     state: present
+# - name: install php extensions
+#   yum:
+#     name: "{{ item }}"
+#     state: present
+#   with_items:
+#   - php-pear
+#   - php-devel
+#   - php-bcmath
+#   - php-domxml-php4-php5
+#   - php-gd
+#   - php-pecl-imagick
+#   - php-imap
+#   - php-mbstring
+#   - php-mcrypt
+#   - php-pecl-memcache
+#   - php-mysql
+#   - php-redis
+#   - php-soap
+#   - php-xml
+# - name: set default php.ini
+#   template:
+#     src: php.ini.j2
+#     dest: /etc/php.ini
+#   register: php53_php_ini
+- name: change apache user
+  lineinfile:
+    dest: /etc/httpd/conf/httpd.conf
+    regexp: ^User\s
+    line: User nobody
+- name: change apache group
+  lineinfile:
+    dest: /etc/httpd/conf/httpd.conf
+    regexp: ^Group\s
+    line: Group nobody
+- lineinfile:
+    dest: /etc/httpd/conf/httpd.conf
+    regexp: ^NameVirtualHost\s
+    line: NameVirtualHost *:80

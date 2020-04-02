@@ -1,0 +1,6 @@
+---
+# bbs.daoxila.com的nginx
+- hosts: com_daoxila_bbs_nginx
+  roles:
+    - common_public
+    - com_daoxila_bbs_nginx

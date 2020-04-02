@@ -1,0 +1,26 @@
+server {
+  listen 80;
+  server_name shanghai.daoxila.com;
+
+  root /www/daoxila/daoxila_www_evo/public;
+
+  location / {
+    # try to serve file directly, fallback to index.php
+    try_files $uri /index.php$is_args$args;
+  }
+
+  location ~ ^/index\.php(/|$) {
+    fastcgi_pass daoxila_www_evo;
+    fastcgi_split_path_info ^(.+\.php)(/.*)$;
+    fastcgi_buffering off;
+    include fastcgi_params;
+    fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+    # Prevents URIs that include the front controller. This will 404:
+    # http://domain.tld/index.php/some-path
+    # Remove the internal directive to allow URIs like this
+    internal;
+  }
+
+  error_log /var/log/nginx/www_evo-error.log;
+  access_log /var/log/nginx/www_evo-access.log;
+}

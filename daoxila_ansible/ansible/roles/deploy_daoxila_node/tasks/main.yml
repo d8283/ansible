@@ -1,0 +1,12 @@
+---
+- yum: name={{ name }} state=latest update_cache=yes
+- file: path=/pub/webnode/{{ name }} owner=nobody group=nobody state=directory recurse=yes
+- file: path=/pub/webnode/node_modules state=link src=daoxila_node_modules
+  when: name == 'daoxila_node_modules'
+- file: path=/pub/webnode/{{ name }}/pm2start.sh state=file mode=a+x
+- command: ./pm2start.sh
+  args:
+     chdir: /pub/webnode/{{ name }}
+- command: pm2 restart all
+  when: name == 'daoxila_node_modules'
+- command: pm2 dump

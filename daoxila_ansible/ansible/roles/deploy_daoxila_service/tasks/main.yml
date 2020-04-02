@@ -1,0 +1,9 @@
+---
+- service: name=httpd state=stopped
+- yum: name=daoxila_service state=latest update_cache=yes
+- file: path=/www/daoxila/daoxila_service owner=nobody group=nobody state=directory recurse=yes
+- template: src=application.ini.j2 dest=/www/daoxila/daoxila_service/configs/system/application.ini
+- template: src=db.ini.j2 dest=/www/daoxila/daoxila_service/configs/system/db.ini
+- template: src=memcache.php.j2 dest=/www/daoxila/daoxila_service/configs/system/memcache.php
+- template: src=redis.php.j2 dest=/www/daoxila/daoxila_service/configs/system/redis.php
+- service: name=httpd state=started

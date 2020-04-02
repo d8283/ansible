@@ -1,0 +1,65 @@
+upstream daoxila_node_public {
+{% for host in groups.daoxila_node %}
+  server {{ host }}:3332;
+{% endfor %}
+}
+
+upstream daoxila_node_www {
+{% for host in groups.daoxila_node %}
+  server {{ host }}:3333;
+{% endfor %}
+}
+
+upstream daoxila_node_hunqing {
+{% for host in groups.daoxila_node %}
+  server {{ host }}:3334;
+{% endfor %}
+}
+
+upstream daoxila_node_wedding {
+{% for host in groups.daoxila_node %}
+  server {{ host }}:3335;
+{% endfor %}
+}
+
+upstream daoxila_node_miyue {
+{% for host in groups.daoxila_node %}
+  server {{ host }}:3336;
+{% endfor %}
+}
+
+upstream daoxila_node_hunpin {
+{% for host in groups.daoxila_node %}
+  server {{ host }}:3337;
+{% endfor %}
+}
+
+upstream daoxila_node_gongju {
+{% for host in groups.daoxila_node %}
+  server {{ host }}:3338;
+{% endfor %}
+}
+
+upstream daoxila_node_hunche {
+{% for host in groups.daoxila_node %}
+  server {{ host }}:3339;
+{% endfor %}
+}
+
+upstream daoxila_node_buy {
+{% for host in groups.daoxila_node %}
+  server {{ host }}:3340;
+{% endfor %}
+}
+
+upstream daoxila_node_lvpai {
+{% for host in groups.daoxila_node %}
+  server {{ host }}:3341;
+{% endfor %}
+}
+
+upstream daoxila_node_lifu {
+{% for host in groups.daoxila_node %}
+  server {{ host }}:3342;
+{% endfor %}
+}

@@ -1,0 +1,5 @@
+---
+# 见secure_sshd角色
+- hosts: all
+  roles:
+  - secure_sshd

@@ -1,0 +1,11 @@
+---
+- name: start apache2
+  service:
+    name: httpd
+    state: started
+    enabled: yes
+- name: daoxila_my apache virtual host conf
+  template:
+    src: apache.daoxila_my.conf.j2
+    dest: /etc/httpd/conf.d/daoxila_my.conf
+  notify: restart apache

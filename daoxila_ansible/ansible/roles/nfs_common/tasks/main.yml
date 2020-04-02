@@ -1,0 +1,4 @@
+---
+- yum:
+    name: nfs-utils
+    state: present

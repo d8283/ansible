@@ -1,0 +1,13 @@
+---
+- copy:
+    src: yum.mongodb.repo
+    dest: /etc/yum.repos.d/mongodb-org-3.2.repo
+- command: yumdownloader {{ item }}
+  args:
+    chdir: "{{ repobase }}"
+  with_items:
+  - mongodb-org
+  - mongodb-org-server
+  - mongodb-org-mongos
+  - mongodb-org-shell
+  - mongodb-org-tools

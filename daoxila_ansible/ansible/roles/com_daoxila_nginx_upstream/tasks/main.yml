@@ -1,0 +1,16 @@
+---
+- name: add upstream v1_root
+  template:
+    src: upstream.v1_root.conf.j2
+    dest: /etc/nginx/upstreams/daoxila_v1_root.conf
+  notify: reload nginx
+- name: add upstream node
+  template:
+    src: upstream.node.conf.j2
+    dest: /etc/nginx/upstreams/daoxila_node.conf
+  notify: reload nginx
+- name: add upstream daoxila_my
+  template:
+    src: upstream.daoxila_my.conf.j2
+    dest: /etc/nginx/upstreams/daoxila_my.conf
+  notify: reload nginx

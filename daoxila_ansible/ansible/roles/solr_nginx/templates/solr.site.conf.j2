@@ -1,0 +1,22 @@
+upstream solr_cloud {
+{% for host in groups['solr_cloud'] %}
+  server {{ host }}:8983;
+{% endfor %}
+  keepalive 100;
+}
+
+server {
+  listen 8983;
+  server_name solr.daoxila.org;
+  client_max_body_size 0;
+
+  location / {
+    proxy_pass http://solr_cloud;
+    proxy_http_version 1.1;
+    proxy_set_header Connection "";
+    proxy_read_timeout 300;
+  }
+
+  error_log /var/log/nginx/solr_error.log;
+  access_log /var/log/nginx/solr_access.log;
+}

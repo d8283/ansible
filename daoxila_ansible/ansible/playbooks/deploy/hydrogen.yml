@@ -1,0 +1,9 @@
+---
+# 部署hydrogen, 即greentea core的build程序
+- hosts:
+  - hydrogen
+  roles:
+  - role: deploy_hydrogen
+    name: hydrogen
+    solr_core: greentea
+

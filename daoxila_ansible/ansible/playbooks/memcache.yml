@@ -1,0 +1,20 @@
+---
+# memcache缓存服务
+- name: memcache
+  hosts: memcache
+  roles:
+    - common
+    - memcache
+# memcache session服务
+- name: memcache session
+  hosts: memcache_session
+  roles:
+    - common
+    - memcache
+    - memcache_session
+- name: memcache new
+  hosts: memcache_new
+  roles:
+    - common
+    - role: memcache_base
+      port: 11211

@@ -1,0 +1,20 @@
+---
+# 部分域名需要uplodify.swf在根路径下，这个角色的作用就是这个
+- name: path for uploadify
+  file:
+    path: /www/daoxila/uploadify
+    owner: nginx
+    group: nginx
+    state: directory
+- name: crossdomain.xml
+  copy:
+    src: crossdomain.xml
+    dest: /www/daoxila/uploadify/crossdomain.xml
+    owner: nginx
+    group: nginx
+- name: uploadify.swf
+  copy:
+    src: uploadify.swf
+    dest: /www/daoxila/uploadify/uploadify.swf
+    owner: nginx
+    group: nginx

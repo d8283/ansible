@@ -1,0 +1,121 @@
+server {
+  listen        80;
+  server_name   *.daoxila.com *.dxlurl.com;
+
+  location ~ ^/HunYan/(.*)-Info {
+    proxy_pass                  http://daoxila_node_www;
+    proxy_next_upstream         http_500 http_502 http_504 error timeout invalid_header;
+    proxy_set_header            Host            $host;
+    proxy_set_header            Proxy-Host      $proxy_host;
+    proxy_set_header            X-Forwarded-Proto $scheme;
+    proxy_set_header            Connection "";
+    proxy_http_version          1.1;
+
+    proxy_pass_request_headers  on;
+  }
+
+  location ~ ^/HunYan/json {
+    proxy_pass                  http://daoxila_node_www;
+    proxy_next_upstream         http_500 http_502 http_504 error timeout invalid_header;
+    proxy_set_header            Host            $host;
+    proxy_set_header            Proxy-Host      $proxy_host;
+    proxy_set_header            X-Forwarded-Proto $scheme;
+    proxy_set_header            Connection "";
+    proxy_http_version          1.1;
+    proxy_pass_request_headers  on;
+  }
+
+  location ~ ^/HunShaSheYing/(.*)-Event-(\d+) {
+    proxy_pass                  http://daoxila_v1_root;
+    proxy_next_upstream         http_500 http_502 http_504 error timeout invalid_header;
+    proxy_set_header            Host            $host;
+    proxy_set_header            Proxy-Host      $proxy_host;
+    proxy_set_header            X-Forwarded-Proto $scheme;
+    proxy_pass_request_headers  on;
+  }
+
+  location ~ ^/HunShaSheYing {
+    proxy_pass                  http://daoxila_node_wedding;
+    proxy_next_upstream         http_500 http_502 http_504 error timeout invalid_header;
+    proxy_set_header            Host            $host;
+    proxy_set_header            Proxy-Host      $proxy_host;
+    proxy_set_header            X-Forwarded-Proto $scheme;
+    proxy_set_header            Connection "";
+    proxy_http_version          1.1;
+    proxy_pass_request_headers  on;
+  }
+
+  location ~ ^/HunQing {
+    proxy_pass                  http://daoxila_node_hunqing;
+    proxy_next_upstream         http_500 http_502 http_504 error timeout invalid_header;
+    proxy_set_header            Host            $host;
+    proxy_set_header            Proxy-Host      $proxy_host;
+    proxy_set_header            X-Forwarded-Proto $scheme;
+    proxy_set_header            Connection "";
+    proxy_http_version          1.1;
+    proxy_pass_request_headers  on;
+  }
+
+  location ~ ^/HunChe {
+    proxy_pass                  http://daoxila_node_hunche;
+    proxy_next_upstream         http_500 http_502 http_504 error timeout invalid_header;
+    proxy_set_header            Host            $host;
+    proxy_set_header            Proxy-Host      $proxy_host;
+    proxy_set_header            X-Forwarded-Proto $scheme;
+    proxy_set_header            Connection "";
+    proxy_http_version          1.1;
+    proxy_pass_request_headers  on;
+  }
+
+  location /HunShaLiFu {
+    proxy_pass                  http://daoxila_node_lifu;
+    proxy_next_upstream         http_500 http_502 http_504 error timeout invalid_header;
+    proxy_set_header            Host            $host;
+    proxy_set_header            Proxy-Host      $proxy_host;
+    proxy_set_header            X-Forwarded-Proto $scheme;
+    proxy_set_header            Connection "";
+    proxy_http_version          1.1;
+    proxy_pass_request_headers  on;
+  }
+
+  location ^~ /Review/HunShaLiFu {
+    proxy_pass                  http://daoxila_node_lifu;
+    proxy_next_upstream         http_500 http_502 http_504 error timeout invalid_header;
+    proxy_set_header            Host            $host;
+    proxy_set_header            Proxy-Host      $proxy_host;
+    proxy_set_header            X-Forwarded-Proto $scheme;
+    proxy_set_header            Connection "";
+    proxy_http_version          1.1;
+    proxy_pass_request_headers  on;
+  }
+
+
+  location ~ ^/error{
+    proxy_pass                  http://daoxila_node_gongju;
+    proxy_next_upstream         http_500 http_502 http_504 error timeout invalid_header;
+    proxy_set_header            Host            $host;
+    proxy_set_header            Proxy-Host      $proxy_host;
+    proxy_set_header            X-Forwarded-Proto $scheme;
+    proxy_pass_request_headers  on;
+  }
+
+  location / {
+    proxy_pass                  http://daoxila_v1_root;
+    proxy_next_upstream         http_500 http_502 http_504 error timeout invalid_header;
+    proxy_set_header            Host            $host;
+    proxy_set_header            Proxy-Host      $proxy_host;
+    proxy_set_header            X-Forwarded-Proto $scheme;
+    proxy_pass_request_headers  on;
+  }
+
+  location /crossdomain.xml {
+    root                        /www/daoxila/daoxila_com;
+  }
+
+  location /uploadify.swf {
+    root                        /www/daoxila/uploadify;
+  }
+
+  error_log /var/log/nginx/com_daoxila_city-error.log;
+  access_log /var/log/nginx/com_daoxila_city-access.log;
+}

@@ -1,0 +1,7 @@
+---
+dependencies:
+- php56
+- php_ext_solr
+- php_ext_yaf
+- user_nobody
+- env_php

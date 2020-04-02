@@ -1,0 +1,10 @@
+---
+- hosts: daoxila_greentea
+  roles:
+  - role: deploy_php
+    project: daoxila_greentea
+    load_balance: tengine
+  serial: 1
+- hosts: hydrogen
+  roles:
+  - deploy_hydrogen

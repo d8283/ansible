@@ -1,0 +1,26 @@
+---
+- assert:
+    that: master_user != '' and master_password != ''
+- template:
+    src: my.cnf.j2
+    dest: /etc/my.cnf
+  register: my_cnf
+- service:
+    name: mysqld
+    state: restarted
+  when: my_cnf.changed
+- command: "mysql mysql -NB -e \"select count(*) from user where User='{{ master_user }}'\""
+  register: r
+  changed_when: False
+- command: "mysql -NB -e \"CREATE USER '{{ master_user }}'@'%' IDENTIFIED BY '{{ master_password }}';GRANT REPLICATION SLAVE ON *.* TO '{{ master_user }}'@'%';\""
+  when: r.stdout == '0'
+- command: "mysql mysql -NB -e \"select count(*) from user where User='{{ mysql_master_user }}'\""
+  register: r
+  changed_when: False
+- command: "mysql -NB -e \"CREATE USER '{{ mysql_master_user }}'@'%' IDENTIFIED BY '{{ mysql_master_pass }}';GRANT ALL PRIVILEGES ON *.* TO '{{ mysql_master_user }}'@'%';\""
+  when: r.stdout == '0'
+- command: "mysql mysql -NB -e \"select count(*) from user where User='{{ mysql_slave_user }}'\""
+  register: r
+  changed_when: False
+- command: "mysql -NB -e \"CREATE USER '{{ mysql_slave_user }}'@'%' IDENTIFIED BY '{{ mysql_slave_pass }}';GRANT SELECT, SHOW VIEW, PROCESS ON *.* TO '{{ mysql_slave_user }}'@'%';\""
+  when: r.stdout == '0'

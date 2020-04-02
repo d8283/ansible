@@ -1,0 +1,267 @@
+---
+databases:
+  api:
+    description: App
+    host: slave
+    default_data: no
+
+  dxl_api:
+    description: Sms
+    host: slave
+    default_data: no
+    all_tables: no
+    tables: no
+      - ex_sms_quene
+
+  dxl_auth:
+    host: slave
+    default_data: yes
+
+  dxl_bid:
+    host: newsql
+    default_data: no
+
+  dxl_ceremony:
+    host: newsql
+    default_data: yes
+    table_no_data:
+      - action_log
+      - appoint_order
+      - appoint_order_copy
+      - appoint_order_follow_log
+      - appoint_order_operate_log
+      - confirm
+      - confirm_contactor
+      - confirm_final
+      - confirm_history
+      - confirm_log
+      - field_change_log
+      - m3u8
+      - newpattern_invoice_action_list
+      - newpattern_invoice_list
+      - order
+      - order_appeal
+      - order_appeal_change_log
+      - order_appeal_detail
+      - order_appeal_item
+      - real_receive_action_list
+      - real_receive_total
+      - receive_list
+      - receive_total
+      - video
+      - video_m3u8
+
+  dxl_coupon:
+    host: newsql
+    default_data: yes
+
+  dxl_event:
+    host: slave
+    default_data: no
+
+  dxl_exodus:
+    host: slave
+    default_data: no
+    table_data:
+      - ex_app_parameter
+      - ex_auth
+      - ex_auth_role
+      - ex_config_tag
+      - ex_tag
+      - ex_tag_city
+      - ex_tag_item
+      - ex_tag_related_price
+      - ex_city
+      - ex_city_config
+      - ex_city_price
+      - ex_gift
+      - ex_hot_hotel
+      - ex_hotel
+      - ex_hotel_ad
+      - ex_hotel_ad_item
+      - ex_hotel_auth_review
+      - ex_hotel_contact
+      - ex_hotel_contact_old
+      - ex_hotel_copy
+      - ex_hotel_event
+      - ex_hotel_ext
+      - ex_hotel_ext_feature
+      - ex_hotel_ext_menu
+      - ex_hotel_hall
+      - ex_hotel_hall_schedule
+      - ex_hotel_image
+      - ex_hotel_left_num
+      - ex_hotel_name_history
+      - ex_hotel_url
+      - ex_mall_ad
+      - ex_mall_biz
+      - ex_mall_bizAlbum
+      - ex_mall_bizAlbum_images
+      - ex_mall_biz_ad
+      - ex_mall_biz_commodity
+      - ex_mall_biz_commodity_ad
+      - ex_mall_biz_commodity_property
+      - ex_mall_biz_commodity_property_value
+      - ex_mall_biz_contact
+      - ex_mall_biz_ext
+      - ex_mall_biz_url
+      - ex_mall_consumer_detail
+      - ex_mall_image
+      - ex_mall_rebate
+      - ex_sms_tpl
+      - ex_sms_tpl_class
+      - jo_auth_user
+      - jo_auth_user_like
+      - jo_city_user_item
+      - jo_module
+      - jo_resource
+      - jo_role
+      - jo_role_module_item
+      - jo_role_resource_item
+      - jo_role_user_item
+      - ontop
+      - ontop_biz
+
+  dxl_feast:
+    host: newsql
+    default_data: yes
+    table_no_data:
+      - hotel_bd_log
+      - hotel_coupon
+      - list_flag_temp
+      - temp_img
+      - tmp_hotel
+
+  dxl_honeymoon:
+    host: newsql
+    default_data: yes
+    table_no_data:
+      - order
+      - order_amount_log
+      - order_dispatch
+      - order_extra
+      - order_follow_log
+
+  dxl_hunche:
+    host: newsql
+    default_data: yes
+    table_no_data:
+      - order
+      - order_amount_log
+      - order_dispatch
+      - order_extra
+      - order_follow_log
+      - qiniu_callback_logs
+
+  dxl_hunpin:
+    host: newsql
+    default_data: yes
+
+  dxl_info:
+    host: slave
+    default_data: no
+    table_data:
+      - article
+      - article_anchor
+      - article_log
+      - channel
+      - ex_question
+      - ex_question_ext
+      - image
+      - module
+      - question_channel
+      - statistics
+
+  dxl_interactive:
+    host: newsql
+    default_data: no
+
+  dxl_log:
+    host: slave
+    default_data: no
+
+  dxl_pay:
+    host: slave
+    default_data: no
+
+  dxl_pub:
+    host: newsql
+    default_data: no
+    table_data:
+      - coupon_promotion
+      - coupon_promotion_rel
+      - res_channel
+      - res_page
+      - res_site
+      - view_item_final
+      - view_item_preview
+      - view_item_push_notice
+      - view_solution
+      - view_template
+
+  dxl_score:
+    host: newsql
+    default_data: no
+
+  dxl_sms:
+    host: slave
+    default_data: no
+
+  dxl_story:
+    host: newsql
+    default_data: yes
+
+  dxl_clothing:
+    host: newsql
+    default_data: yes
+
+  dxl_supplier:
+    host: newsql
+    default_data: yes
+
+  dxl_wedding:
+    host: newsql
+    default_data: yes
+    table_no_data:
+      - m3u8
+      - qiniu_callback_logs
+      - video
+      - video_m3u8
+
+  dxl_api_log:
+    host: logserver
+    default_data: no
+
+  dxl_coupon_log:
+    host: logserver
+    default_data: no
+
+  dxl_feast_log:
+    host: logserver
+    default_data: no
+
+  dxl_wedding_log:
+    host: logserver
+    default_data: no
+
+hosts:
+  slave:
+    host: {{ sync_slave_host }}
+    user: {{ sync_slave_user }}
+    pass: {{ sync_slave_pass }}
+  newsql:
+    host: {{ sync_newdb_host }}
+    user: {{ sync_newdb_user }}
+    pass: {{ sync_newdb_pass }}
+  logserver:
+    host: {{ sync_logdb_host }}
+    user: {{ sync_logdb_user }}
+    pass: {{ sync_logdb_pass }}
+  bbs:
+    host: {{ sync_bbs_host }}
+    user: {{ sync_bbs_user }}
+    pass: {{ sync_bbs_pass }}
+
+db_host: {{ db_host }}
+db_user: {{ db_user }}
+db_pass: {{ db_pass }}

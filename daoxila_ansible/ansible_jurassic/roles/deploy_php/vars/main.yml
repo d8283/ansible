@@ -1,0 +1,6 @@
+---
+project_root: /www/daoxila
+project_owner: nobody
+project_group: nobody
+env_path: /usr/local/server/apache/conf/env/Env.php
+php_bin: /usr/local/server/php/bin/php

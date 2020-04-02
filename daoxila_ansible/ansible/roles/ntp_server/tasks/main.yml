@@ -1,0 +1,16 @@
+---
+# 设置ntp从外网公共服务器同步时间
+- command: "cat /etc/ansible_conflict_ntq"
+  failed_when: False
+  changed_when: False
+  register: conflict
+- assert:
+    that: "conflict.rc != 0 or conflict.stdout == '{{ role_path|basename }}'"
+- name: set ntp.conf as a server
+  template:
+    src: ntp.conf.j2
+    dest: /etc/ntp.conf
+  notify: restart ntp
+- copy:
+    dest: /etc/ansible_conflict_ntq
+    content: "{{ role_path|basename }}"

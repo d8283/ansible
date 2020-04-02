@@ -1,0 +1,3 @@
+---
+- name: disable postfix
+  service: name=postfix state=stopped enabled=no

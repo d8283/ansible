@@ -1,0 +1,5 @@
+---
+dependencies:
+- php53
+- php_ext_yaf
+- env_php

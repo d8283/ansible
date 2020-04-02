@@ -1,0 +1,7 @@
+---
+# redis服务
+- name: redis
+  hosts: redis
+  roles:
+    - common
+    - redis

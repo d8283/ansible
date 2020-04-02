@@ -1,0 +1,14 @@
+---
+# 包含若干公用角色，用于有公网IP的节点
+# 开启了iptables等服务
+- command: "cat /etc/ansible_conflict_iptables"
+  failed_when: False
+  changed_when: False
+  register: conflict
+- assert:
+    that: "conflict.rc != 0 or conflict.stdout == '{{ role_path|basename }}'"
+- name: enable iptables
+  service: name=iptables state=started enabled=yes
+- copy:
+    dest: /etc/ansible_conflict_iptables
+    content: "{{ role_path|basename }}"

@@ -1,0 +1,7 @@
+---
+# 部署daoxila_v5
+- hosts:
+  - daoxila_v5
+  roles:
+  - deploy_daoxila_v5
+  serial: "30%"

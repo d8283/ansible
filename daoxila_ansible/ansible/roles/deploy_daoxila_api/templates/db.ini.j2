@@ -1,0 +1,420 @@
+; --- 默认读取的数据库 ---
+;default_db                     = main
+
+; --- 主库配置 ---
+[main]
+; --- 开启读写分离  ---
+enable_w_r              = DB_RW_OFF
+; --- 主库配置 ---
+master['driver']            = Pdo_Mysql
+master['host']              = DB_MAIN_MASTER_HOST
+master['port']              = 3306
+master['username']          = DB_MAIN_MASTER_USER
+master['password']          = DB_MAIN_MASTER_PWD
+master['dbname']            = DB_MAIN_DBNAME
+master['persistent']        = false
+master['characterset']      = utf8
+master['port'] = 3306
+master['db_dsn'] = 'mysql:'
+master['characterset'] = utf8
+master['db_type'] = Pdo
+master['db_params'] = ''
+
+; --- 从库配置 ---
+slave['driver']             = Pdo_Mysql
+slave['host']               = DB_MAIN_SLAVE_HOST
+slave['port']               = 3306
+slave['username']           = DB_MAIN_SLAVE_USER
+slave['password']           = DB_MAIN_SLAVE_PWD
+slave['dbname']             = DB_MAIN_DBNAME
+slave['persistent']         = false
+slave['characterset']       = utf8
+slave['port'] = 3306
+slave['db_dsn'] = 'mysql:'
+slave['characterset'] = utf8
+slave['db_type'] = Pdo
+slave['db_params'] = ''
+
+[api]
+; --- api库配置 ---
+enable_w_r                  = 0
+master['driver']            = Pdo_Mysql
+master['host']              = 192.168.22.6
+master['port']              = 3306
+master['username']          = dxl_dev
+master['password']          = Ze2bUs5zMob1
+master['dbname']            = api
+master['persistent']        = false
+master['characterset']      = utf8
+
+; --- dxl_api库配置 ---
+[dxl_api]
+enable_w_r                              = DB_RW_OFF
+master['driver']                        = Pdo_Mysql
+master['host']                          = DB_MAIN_MASTER_HOST
+master['username']                      = DB_MAIN_MASTER_USER
+master['password']                      = DB_MAIN_MASTER_PWD
+master['dbname']                        = DB_DXLAPI_DBNAME
+master.driver_options.1002              = "SET NAMES UTF8"
+master['characterset']                  = utf8
+master['port'] = 3306
+
+master['db_dsn'] = 'mysql:'
+master['db_type'] = Pdo
+master['db_params'] = ''
+master['persistent'] = false
+
+slave['driver']                         = Pdo_Mysql
+slave['host']                           = DB_MAIN_SLAVE_HOST
+slave['username']                       = DB_MAIN_SLAVE_USER
+slave['password']                       = DB_MAIN_SLAVE_PWD
+slave['dbname']                         = DB_DXLAPI_DBNAME
+slave.driver_options.1002               = "SET NAMES UTF8"
+slave['characterset']                   = utf8
+slave['db_dsn'] = 'mysql:'
+slave['db_type'] = Pdo
+slave['db_params'] = ''
+
+; --- 活动库配置 ---
+[dxl_event]
+enable_w_r              = DB_RW_OFF
+master['driver']            = Pdo_Mysql
+master['host']              = DB_MAIN_MASTER_HOST
+master['username']          = DB_MAIN_MASTER_USER
+master['password']          = DB_MAIN_MASTER_PWD
+master['dbname']            = DB_EVENT_DBNAME
+master.driver_options.1002      = "SET NAMES UTF8"
+master['characterset']          = utf8
+
+slave['driver']             = Pdo_Mysql
+slave['host']               = DB_MAIN_SLAVE_HOST
+slave['username']           = DB_MAIN_SLAVE_USER
+slave['password']           = DB_MAIN_SLAVE_PWD
+slave['dbname']             = DB_EVENT_DBNAME
+slave.driver_options.1002       = "SET NAMES UTF8"
+slave['characterset']           = utf8
+
+[dxl_info]
+enable_w_r                  = DB_RW_OFF
+master['driver']            = Pdo_Mysql
+master['host']              = DB_MAIN_MASTER_HOST
+master['port']              = 3306
+master['username']          = DB_MAIN_MASTER_USER
+master['password']          = DB_MAIN_MASTER_PWD
+master['dbname']            = dxl_info
+master['persistent']        = false
+master['characterset']      = utf8
+; --- 从库配置 ---
+slave['driver']             = Pdo_Mysql
+slave['host']               = DB_MAIN_SLAVE_HOST
+slave['port']               = 3306
+slave['username']           = DB_MAIN_SLAVE_USER
+slave['password']           = DB_MAIN_SLAVE_PWD
+slave['dbname']             = dxl_info
+slave['persistent']         = false
+slave['characterset']       = utf8
+
+
+[feast]
+; --- 开启读写分离  ---
+enable_w_r                  = DB_RW_OFF
+; --- 主库配置 ---
+master['driver']            = Pdo_Mysql
+master['host']              = DB_FEAST_MASTER_HOST
+master['port']              = 3306
+master['username']          = DB_FEAST_MASTER_USER
+master['password']          = DB_FEAST_MASTER_PWD
+master['dbname']            = DB_FEAST_DBNAME
+master['persistent']        = false
+master['characterset']      = utf8
+master['port'] = 3306
+master['db_dsn'] = 'mysql:'
+master['characterset'] = utf8
+master['db_type'] = Pdo
+master['db_params'] = ''
+
+; --- 从库配置 ---
+slave['driver']             = Pdo_Mysql
+slave['host']               = DB_FEAST_SLAVE_HOST
+slave['port']               = 3306
+slave['username']           = DB_FEAST_SLAVE_USER
+slave['password']           = DB_FEAST_SLAVE_PWD
+slave['dbname']             = DB_FEAST_DBNAME
+slave['persistent']         = false
+slave['characterset']       = utf8
+slave['db_dsn'] = 'mysql:'
+slave['db_type'] = Pdo
+slave['db_params'] = ''
+
+[exodus]
+; --- 开启读写分离  ---
+enable_w_r              = DB_RW_OFF
+; --- 主库配置 ---
+master['driver']            = Pdo_Mysql
+master['host']              = DB_MAIN_MASTER_HOST
+master['port']              = 3306
+master['username']          = DB_MAIN_MASTER_USER
+master['password']          = DB_MAIN_MASTER_PWD
+master['dbname']            = DB_MAIN_DBNAME
+master['persistent']        = false
+master['characterset']      = utf8
+
+master['db_dsn'] = 'mysql:'
+master['db_type'] = Pdo
+master['db_params'] = ''
+
+; --- 从库配置 ---
+slave['driver']             = Pdo_Mysql
+slave['host']               = DB_MAIN_SLAVE_HOST
+slave['port']               = 3306
+slave['username']           = DB_MAIN_SLAVE_USER
+slave['password']           = DB_MAIN_SLAVE_PWD
+slave['dbname']             = DB_MAIN_DBNAME
+slave['persistent']         = false
+slave['characterset']       = utf8
+slave['port'] = 3306
+slave['db_dsn'] = 'mysql:'
+slave['characterset'] = utf8
+slave['db_type'] = Pdo
+slave['db_params'] = ''
+
+[coupon]
+; --- 开启读写分离  ---
+enable_w_r                  = DB_RW_OFF
+; --- 主库配置 ---
+master['driver']            = Pdo_Mysql
+master['host']              = DB_COUPON_MASTER_HOST
+master['port']              = 3306
+master['username']          = DB_COUPON_MASTER_USER
+master['password']          = DB_COUPON_MASTER_PWD
+master['dbname']            = DB_COUPON_DBNAME
+master['persistent']        = false
+master['characterset']      = utf8
+
+; --- 从库配置 ---
+slave['driver']             = Pdo_Mysql
+slave['host']               = DB_COUPON_SLAVE_HOST
+slave['port']               = 3306
+slave['username']           = DB_COUPON_SLAVE_USER
+slave['password']           = DB_COUPON_SLAVE_PWD
+slave['dbname']             = DB_COUPON_DBNAME
+slave['persistent']         = false
+slave['characterset']       = utf8
+
+
+; --- dxl_biz库配置 ---
+[dxl_biz]
+enable_w_r = DB_RW_OFF
+master['host'] = DB_WEDDING_MASTER_HOST
+master['username'] = DB_WEDDING_MASTER_USER
+master['password'] = DB_WEDDING_MASTER_PWD
+master['dbname'] = DB_WEDDING_DBNAME
+master['port'] = 3306
+master['db_dsn'] = 'mysql:'
+master['characterset'] = utf8
+master['db_type'] = Pdo
+master['db_params'] = ''
+master['persistent'] = ''
+
+slave['host'] = DB_WEDDING_SLAVE_HOST
+slave['username'] = DB_WEDDING_SLAVE_USER
+slave['password'] = DB_WEDDING_SLAVE_PWD
+slave['dbname'] = DB_WEDDING_DBNAME
+slave['port'] = 3306
+slave['db_dsn'] = 'mysql:'
+slave['characterset'] = utf8
+slave['db_type'] = Pdo
+slave['db_params'] = ''
+
+[pub]
+; --- 开启读写分离  ---
+enable_w_r = DB_RW_OFF
+; --- 主库配置 ---
+master['driver']            = Pdo_Mysql
+master['host']              = DB_PUB_MASTER_HOST
+master['port']              = 3306
+master['username']          = DB_PUB_MASTER_USER
+master['password']          = DB_PUB_MASTER_PWD
+master['dbname']            = DB_PUB_DBNAME
+master['persistent']        = false
+master['characterset']      = utf8
+master['db_dsn'] = 'mysql:'
+master['db_type'] = Pdo
+master['db_params'] = ''
+
+; --- 从库配置 ---
+slave['driver']             = Pdo_Mysql
+slave['host']               = DB_PUB_SLAVE_HOST
+slave['port']               = 3306
+slave['username']           = DB_PUB_SLAVE_USER
+slave['password']           = DB_PUB_SLAVE_PWD
+slave['dbname']             = DB_PUB_DBNAME
+slave['persistent']         = false
+slave['characterset']       = utf8
+slave['db_dsn'] = 'mysql:'
+slave['db_type'] = Pdo
+slave['db_params'] = ''
+
+[interactive]
+; --- 开启读写分离  ---
+enable_w_r                  = DB_RW_OFF
+; --- 主库配置 ---
+master['driver']            = Pdo_Mysql
+master['host']              = DB_INTERACTIVE_MASTER_HOST
+master['port']              = 3306
+master['username']          = DB_INTERACTIVE_MASTER_USER
+master['password']          = DB_INTERACTIVE_MASTER_PWD
+master['dbname']            = DB_INTERACTIVE_DBNAME
+master['persistent']        = false
+master['characterset']      = utf8
+
+master['db_dsn'] = 'mysql:'
+master['db_type'] = Pdo
+master['db_params'] = ''
+
+; --- 从库配置 ---
+slave['driver']             = Pdo_Mysql
+slave['host']               = DB_INTERACTIVE_MASTER_HOST
+slave['port']               = 3306
+slave['username']           = DB_INTERACTIVE_MASTER_USER
+slave['password']           = DB_INTERACTIVE_MASTER_PWD
+slave['dbname']             = DB_INTERACTIVE_DBNAME
+slave['persistent']         = false
+slave['characterset']       = utf8
+slave['db_dsn'] = 'mysql:'
+slave['db_type'] = Pdo
+slave['db_params'] = ''
+
+
+
+[hunqing]
+; --- 开启读写分离  ---
+enable_w_r                  = DB_RW_OFF
+; --- 主库配置 ---
+master['driver']            = Pdo_Mysql
+master['host']              = DB_CEREMONY_MASTER_HOST
+master['port']              = 3306
+master['username']          = DB_CEREMONY_MASTER_USER
+master['password']          = DB_CEREMONY_MASTER_PWD
+master['dbname']            = DB_CEREMONY_DBNAME
+master['persistent']        = false
+master['characterset']      = utf8
+master['db_dsn'] = 'mysql:'
+master['db_type'] = Pdo
+master['db_params'] = ''
+
+; --- 从库配置 ---
+slave['driver']             = Pdo_Mysql
+slave['host']               = DB_CEREMONY_MASTER_HOST
+slave['port']               = 3306
+slave['username']           = DB_CEREMONY_MASTER_USER
+slave['password']           = DB_CEREMONY_MASTER_PWD
+slave['dbname']             = DB_CEREMONY_DBNAME
+slave['persistent']         = false
+slave['characterset']       = utf8
+slave['db_dsn'] = 'mysql:'
+slave['db_type'] = Pdo
+slave['db_params'] = ''
+
+
+[ceremony]
+; --- 开启读写分离  ---
+enable_w_r                  = DB_RW_OFF
+; --- 主库配置 ---
+master['driver']            = Pdo_Mysql
+master['host']              = DB_CEREMONY_MASTER_HOST
+master['port']              = 3306
+master['username']          = DB_CEREMONY_MASTER_USER
+master['password']          = DB_CEREMONY_MASTER_PWD
+master['dbname']            = DB_CEREMONY_DBNAME
+master['persistent']        = false
+master['characterset']      = utf8
+master['db_dsn'] = 'mysql:'
+master['db_type'] = Pdo
+master['db_params'] = ''
+
+; --- 从库配置 ---
+slave['driver']             = Pdo_Mysql
+slave['host']               = DB_CEREMONY_MASTER_HOST
+slave['port']               = 3306
+slave['username']           = DB_CEREMONY_MASTER_USER
+slave['password']           = DB_CEREMONY_MASTER_PWD
+slave['dbname']             = DB_CEREMONY_DBNAME
+slave['persistent']         = false
+slave['characterset']       = utf8
+slave['db_dsn'] = 'mysql:'
+slave['db_type'] = Pdo
+slave['db_params'] = ''
+
+[story]
+; --- 开启读写分离  ---
+enable_w_r                  = DB_RW_OFF
+; --- 主库配置 ---
+master['driver']            = Pdo_Mysql
+master['host']              = DB_STORY_MASTER_HOST
+master['port']              = 3306
+master['username']          = DB_STORY_MASTER_USER
+master['password']          = DB_STORY_MASTER_PWD
+master['dbname']            = DB_STORY_DBNAME
+master['persistent']        = false
+master['characterset']      = utf8
+master['db_dsn'] = 'mysql:'
+master['db_type'] = Pdo
+master['db_params'] = ''
+
+; --- 从库配置 ---
+slave['driver']             = Pdo_Mysql
+slave['host']               = DB_STORY_MASTER_HOST
+slave['port']               = 3306
+slave['username']           = DB_STORY_MASTER_USER
+slave['password']           = DB_STORY_MASTER_PWD
+slave['dbname']             = DB_STORY_DBNAME
+slave['persistent']         = false
+slave['characterset']       = utf8
+slave['db_dsn'] = 'mysql:'
+slave['db_type'] = Pdo
+slave['db_params'] = ''
+
+; --- 主库配置 ---
+[api_log]
+; --- 开启读写分离  ---
+enable_w_r              = DB_RW_OFF
+; --- 主库配置 ---
+master['driver']            = Pdo_Mysql
+master['host']              = DB_NEWLOG_HOST
+master['port']              = 3306
+master['username']          = DB_NEWLOG_USER
+master['password']          = DB_NEWLOG_PWD
+master['dbname']            = DB_NEWLOG_API_DBNAME
+master['persistent']        = false
+master['characterset']      = utf8
+master['port'] = 3306
+master['db_dsn'] = 'mysql:'
+master['characterset'] = utf8
+master['db_type'] = Pdo
+master['db_params'] = ''
+
+
+[pay]
+enable_w_r = DB_RW_OFF
+master['host'] = DB_PAY_MASTER_HOST
+master['username'] = DB_PAY_MASTER_USER
+master['password'] = DB_PAY_MASTER_PWD
+master['dbname'] = DB_PAY_DBNAME
+master['port'] = 3306
+master['db_dsn'] = 'mysql:'
+master['characterset'] = utf8
+master['db_type'] = Pdo
+master['db_params'] = ''
+master['persistent'] = false
+
+slave['host'] = DB_PAY_MASTER_HOST
+slave['username'] = DB_PAY_MASTER_USER
+slave['password'] = DB_PAY_MASTER_PWD
+slave['dbname'] = DB_PAY_DBNAME
+slave['port'] = 3306
+slave['db_dsn'] = 'mysql:'
+slave['characterset'] = utf8
+slave['db_type'] = Pdo
+slave['db_params'] = ''
+slave['persistent'] = false

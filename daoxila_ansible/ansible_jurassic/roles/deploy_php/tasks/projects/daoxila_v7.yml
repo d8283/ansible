@@ -1,0 +1,9 @@
+---
+- template:
+    src: "../../templates/v7_params.yml.j2"
+    dest: "{{ project_root }}/{{ project }}/app/config/parameters.yml"
+- template:
+    src: "../../templates/v7_params.yml.j2"
+    dest: "/tmp/v7_parameters.yml"
+- shell: "cat {{ project_root }}/{{ project }}/app/config/parameters.yml"
+- include: symfony2.yml

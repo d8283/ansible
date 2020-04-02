@@ -1,0 +1,4 @@
+---
+dependencies:
+- tengine
+- com_daoxila_nginx_upstream

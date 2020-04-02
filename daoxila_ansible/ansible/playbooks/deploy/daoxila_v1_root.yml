@@ -1,0 +1,7 @@
+---
+# 部署daoxila_v1_root
+- hosts:
+  - daoxila_v1_root
+  roles:
+  - deploy_v1_root
+  serial: "30%"

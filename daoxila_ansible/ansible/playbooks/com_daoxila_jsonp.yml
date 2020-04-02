@@ -1,0 +1,6 @@
+---
+# jsonp.daoxila.com的nginx
+- hosts: com_daoxila_jsonp_nginx
+  roles:
+    - common_public
+    - com_daoxila_jsonp_nginx

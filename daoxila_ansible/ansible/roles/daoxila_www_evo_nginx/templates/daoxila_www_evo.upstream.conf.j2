@@ -1,0 +1,5 @@
+upstream daoxila_www_evo {
+{% for host in groups.daoxila_www_evo_fpm %}
+  server {{ host }}:9002;
+{% endfor %}
+}

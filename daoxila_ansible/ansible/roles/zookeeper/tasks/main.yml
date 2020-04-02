@@ -1,0 +1,68 @@
+---
+# 安装zookeeper
+- name: create zookeeper group
+  group:
+    name: zookeeper
+    state: present
+- name: create zookeeper user
+  user:
+    name: zookeeper
+    group: zookeeper
+    home: /opt/zookeeper
+    createhome: yes
+    shell: /sbin/nologin
+    state: present
+- copy:
+    src: zookeeper-3.4.6.tar.gz
+    dest: /opt/zookeeper/zookeeper-3.4.6.tar.gz
+- name: install zookeeper
+  unarchive:
+    copy: no
+    src: /opt/zookeeper/zookeeper-3.4.6.tar.gz
+    dest: /opt/zookeeper
+    owner: zookeeper
+    group: zookeeper
+    creates: /opt/zookeeper/zookeeper-3.4.6
+- name: logs directory
+  file:
+    path: /opt/zookeeper/logs
+    owner: zookeeper
+    group: zookeeper
+    state: directory
+- name: data directory
+  file:
+    path: /opt/zookeeper/data
+    owner: zookeeper
+    group: zookeeper
+    state: directory
+- name: myid file
+  copy:
+    content: "{{ inventory_hostname|ipaddr('int') % 256 }}"
+    owner: zookeeper
+    group: zookeeper
+    dest: /opt/zookeeper/data/myid
+  notify: restart zookeeper
+- name: set zoo.conf
+  template:
+    src: zoo.cfg.j2
+    owner: zookeeper
+    group: zookeeper
+    dest: /opt/zookeeper/zookeeper-3.4.6/conf/zoo.cfg
+  notify: restart zookeeper
+- name: set zookeeper-env.sh
+  template:
+    src: zookeeper-env.sh.j2
+    owner: zookeeper
+    group: zookeeper
+    dest: /opt/zookeeper/zookeeper-3.4.6/conf/zookeeper-env.sh
+  notify: restart zookeeper
+- name: upstart job
+  template:
+    src: upstart.zookeeper.conf.j2
+    dest: /etc/init/zookeeper.conf
+  notify: restart zookeeper
+- name: start zookeeper
+  service:
+    name: zookeeper
+    state: started
+    enabled: yes

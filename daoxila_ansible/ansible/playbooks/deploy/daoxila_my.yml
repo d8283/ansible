@@ -1,0 +1,7 @@
+---
+# 部署代码daoxila_my
+- hosts:
+  - daoxila_my
+  roles:
+  - deploy_daoxila_my
+  serial: "30%"

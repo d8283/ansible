@@ -1,0 +1,30 @@
+---
+# 预发布环境dns
+# 这个dns服务将域名解析到预发布环境
+- command: "cat /etc/ansible_conflict_dnsmasq"
+  failed_when: False
+  changed_when: False
+  register: conflict
+- assert:
+    that: "conflict.rc != 0 or conflict.stdout == '{{ role_path|basename }}'"
+- name: install dnsmasq
+  yum:
+    name: dnsmasq
+    state: present
+- copy:
+    dest: /etc/resolv.conf
+    content: nameserver 114.114.114.114
+  notify: restart dnsmasq
+- name: set dnsmasq conf
+  template:
+    src: dnsmasq.conf.j2
+    dest: /etc/dnsmasq.conf
+  notify: restart dnsmasq
+- name: start dnsmasq
+  service:
+    name: dnsmasq
+    state: started
+    enabled: yes
+- copy:
+    dest: /etc/ansible_conflict_dnsmasq
+    content: "{{ role_path|basename }}"

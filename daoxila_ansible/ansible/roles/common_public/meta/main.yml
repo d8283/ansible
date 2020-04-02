@@ -1,0 +1,8 @@
+---
+dependencies:
+- yum_aliyun
+- yum_daoxila_release
+- timezone_shanghai
+- disable_postfix
+- dnsmasq_client
+- ntp_client

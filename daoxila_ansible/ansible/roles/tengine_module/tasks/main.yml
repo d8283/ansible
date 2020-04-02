@@ -1,0 +1,8 @@
+---
+- assert:
+    that: module != ''
+- name: load {{ module }}
+  copy:
+    dest: "/etc/nginx/modules-enabled/{{ module }}.conf"
+    content: "load {{ module }}.so;"
+  notify: reload tengine

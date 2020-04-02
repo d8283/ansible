@@ -1,0 +1,20 @@
+<VirtualHost *:80>
+    DocumentRoot "/www/daoxila/daoxila_api/public"
+    ServerAdmin server@daoxila.com
+    ServerName api.daoxila.com
+
+    CustomLog /var/log/httpd/daoxila_api-access.log combined
+    ErrorLog /var/log/httpd/daoxila_api-error.log
+
+    SetEnv ENV_PATH /etc/daoxila/Env.php
+
+    Header add ServerID "api-{{ inventory_hostname|ipaddr('int') % 256 }}"
+</VirtualHost>
+
+<Directory "/www/daoxila/daoxila_api/public">
+    Options -Indexes
+    DirectoryIndex index.html index.htm default.htm index.php
+    AllowOverride All
+    Order Deny,Allow
+    Allow from all
+</Directory>

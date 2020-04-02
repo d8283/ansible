@@ -1,0 +1,5 @@
+---
+dependencies:
+- tengine
+- role: tengine_module
+  module: ngx_http_concat_module

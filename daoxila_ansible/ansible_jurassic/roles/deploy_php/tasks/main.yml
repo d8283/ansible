@@ -1,0 +1,37 @@
+---
+- name: check necessary variables
+  assert:
+    that: project != '' and load_balance != ''
+- name: download package
+  get_url:
+    url: "http://{{ build_server }}/{{ project }}/latest.tgz"
+    dest: "{{ project_root }}/{{ project }}.tgz"
+- name: "remove from load balance"
+  command: "/root/bin/upstream-node-ctl {{ project }} {{ inventory_hostname }} off"
+  delegate_to: "{{ item }}"
+  with_items: groups[load_balance]
+- name: stop apache
+  command: /sbin/service httpd stop
+- name: delete old deploy
+  file:
+    path: "{{ project_root }}/{{ project }}"
+    state: absent
+- shell: "tar -zxf {{ project }}.tgz"
+  args:
+    chdir: "{{ project_root }}"
+- file:
+    path: "{{ project_root }}/{{ project }}.tgz"
+    state: absent
+- include: "projects/{{ project }}.yml"
+- file:
+    path: "{{ project_root }}/{{ project }}"
+    state: directory
+    owner: "{{ project_owner }}"
+    group: "{{ project_group }}"
+    recurse: yes
+- name: start apache
+  command: /sbin/service httpd start
+- name: "add to load balance"
+  command: "/root/bin/upstream-node-ctl {{ project }} {{ inventory_hostname }} on"
+  delegate_to: "{{ item }}"
+  with_items: groups[load_balance]

@@ -1,0 +1,13 @@
+---
+- name: set dns
+  lineinfile:
+    dest: /etc/resolv.conf
+    line: nameserver 114.114.114.114
+- shell: rm -rf /etc/yum.repos.d/*
+- command: curl -SLo /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-6.repo
+- command: curl -SLo /etc/yum.repos.d/CentOS-Epel.repo http://mirrors.aliyun.com/repo/epel-6.repo
+- command: yum clean all
+- command: yum makecache
+- copy:
+    dest: /etc/yum.repos.d/aliyun
+    content: ""

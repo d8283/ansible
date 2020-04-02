@@ -1,0 +1,8 @@
+---
+- yum:
+    name: mysql-community-client
+    state: present
+- shell: "mysqldump -h{{ sync_bbs_host }} -u{{ sync_bbs_user }} -p{{ sync_bbs_pass }} -C --skip-triggers --skip-lock-tables --set-gtid-purged=OFF --single-transaction bbs | sed -e s/AUTO_INCREMENT=[0-9][0-9]*// > /root/dbsync/tmp/bbs.sql"
+- shell: "mysql -h{{ db_host }} -u{{ db_user }} -p{{ db_pass }} -e 'drop database if exists bbs'"
+- shell: "mysql -h{{ db_host }} -u{{ db_user }} -p{{ db_pass }} -e 'create database bbs'"
+- shell: "mysql -h{{ db_host }} -u{{ db_user }} -p{{ db_pass }} bbs < /root/dbsync/tmp/bbs.sql"

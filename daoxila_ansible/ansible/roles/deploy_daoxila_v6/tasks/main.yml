@@ -1,0 +1,14 @@
+---
+  - service: name=php-fpm state=stopped
+  - yum: name=daoxila_v6 state=latest update_cache=yes
+  - template: src=config_prod.yml.j2 dest=/www/daoxila/daoxila_v6/app/config/config_prod.yml
+  - command: ./composer.phar install --prefer-dist --no-dev --no-interaction --no-ansi --no-progress --optimize-autoloader
+    args:
+      chdir: /www/daoxila/daoxila_v6
+    environment:
+        SYMFONY_ENV: prod
+  - file: path=/www/daoxila/daoxila_v6 owner=nobody group=nobody state=directory recurse=yes
+  - yum: name=daoxila_lib state=latest update_cache=yes
+  - file: path=/www/daoxila/daoxila_lib owner=nobody group=nobody state=directory recurse=yes
+  - file: path=/www/daoxila/library state=link src=daoxila_lib
+  - service: name=php-fpm state=started

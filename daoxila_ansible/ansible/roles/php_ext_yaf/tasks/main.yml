@@ -1,0 +1,17 @@
+---
+# 安装php yaf扩展
+- name: install gcc
+  yum:
+    name: gcc
+    state: present
+- yum:
+    name: pcre-devel
+    state: present
+- name: install yaf
+  shell: "pecl install yaf"
+  args:
+    creates: /usr/lib64/php/modules/yaf.so
+- name: load yaf
+  copy:
+    dest: /etc/php.d/yaf.ini
+    content: extension=yaf.so

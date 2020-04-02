@@ -1,0 +1,21 @@
+---
+- assert:
+    that: master_host != '' and master_user != '' and master_password != ''
+- template:
+    src: my.cnf.j2
+    dest: /etc/my.cnf
+  register: my_cnf
+- service:
+    name: mysqld
+    state: restarted
+  when: my_cnf.changed
+- command: "mysql mysql -NB -e \"select count(*) from user where User='{{ mysql_slave_user }}'\""
+  register: r
+  changed_when: False
+- command: "mysql -NB -e \"CREATE USER '{{ mysql_slave_user }}'@'%' IDENTIFIED BY '{{ mysql_slave_pass }}';GRANT SELECT, SHOW VIEW, PROCESS ON *.* TO '{{ mysql_slave_user }}'@'%';\""
+  when: r.stdout == '0'
+- command: mysql mysql -NB -uroot -e "show slave status"
+  register: slave_status
+  changed_when: False
+- include: change_master.yml
+  when: slave_status.stdout == ''

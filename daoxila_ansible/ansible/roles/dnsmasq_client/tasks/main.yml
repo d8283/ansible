@@ -1,0 +1,14 @@
+---
+- command: "cat /etc/ansible_conflict_dnsmasq"
+  failed_when: False
+  changed_when: False
+  register: conflict
+- assert:
+    that: "conflict.rc != 0 or conflict.stdout == '{{ role_path|basename }}'"
+- name: set dns server
+  template:
+    src: resolv.conf.j2
+    dest: /etc/resolv.conf
+- copy:
+    dest: /etc/ansible_conflict_dnsmasq
+    content: "{{ role_path|basename }}"

@@ -1,0 +1,16 @@
+---
+- name: add greentea upstream conf
+  template:
+    src: daoxila_greentea.upstream.conf.j2
+    dest: /etc/nginx/upstreams/daoxila_greentea.conf
+  notify: restart nginx
+- name: add greentea nginx conf
+  template:
+    src: daoxila_greentea.site.conf.j2
+    dest: /etc/nginx/sites-enabled/daoxila_greentea.conf
+  notify: restart nginx
+- name: start nginx
+  service:
+    name: tengine
+    state: started
+    enabled: yes

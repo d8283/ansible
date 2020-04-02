@@ -1,0 +1,9 @@
+---
+# 将yum源替换为aliyun
+- name: repo set?
+  shell: test -f /etc/yum.repos.d/aliyun
+  register: result
+  failed_when: False
+  changed_when: False
+- include: aliyun.yml
+  when: result|failed

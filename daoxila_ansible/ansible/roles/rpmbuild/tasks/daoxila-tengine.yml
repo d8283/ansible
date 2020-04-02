@@ -1,0 +1,20 @@
+---
+- yum:
+    name: rpm-build
+    state: present
+- copy:
+    src: tengine/
+    dest: /root/rpmbuild
+- yum:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - openssl-devel
+    - zlib-devel
+    - pcre-devel
+    - geoip
+    - geoip-devel
+    - curl-devel
+    - lua-devel
+- command: "rpmbuild -bb /root/rpmbuild/SPECS/daoxila-tengine.spec"
+- shell: "mv /root/rpmbuild/RPMS/x86_64/daoxila-tengine*.rpm {{ repobase }}"

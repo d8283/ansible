@@ -1,0 +1,7 @@
+---
+- hosts: daoxila_www_evo
+  roles:
+  - role: deploy_php
+    project: daoxila_www_evo
+    load_balance: tengine
+  serial: 1

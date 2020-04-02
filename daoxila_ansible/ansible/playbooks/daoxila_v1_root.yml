@@ -1,0 +1,7 @@
+---
+# daoxila_v1_root的运行环境
+- hosts: daoxila_v1_root
+  roles:
+    - common
+    - nfs_client
+    - daoxila_v1_root

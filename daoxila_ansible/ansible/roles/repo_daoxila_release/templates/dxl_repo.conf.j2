@@ -1,0 +1,9 @@
+<VirtualHost *:80>
+    <Directory "/">
+        Options Indexes FollowSymLinks
+    </Directory>
+    DocumentRoot  /data/yum_daoxila_release
+    ServerName repo.daoxila.org
+    ErrorLog logs/repo.daoxila.org-error_log
+    CustomLog logs/repo.daoxila.org-access_log common
+</VirtualHost>

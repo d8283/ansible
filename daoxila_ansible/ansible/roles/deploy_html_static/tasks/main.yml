@@ -1,0 +1,8 @@
+---
+- name: update projects
+  yum: name={{ project }} state=latest update_cache={{ update_cache }}
+- name: make links
+  file:
+    path: /www/daoxila/{{ project|str_substr(12) }}
+    src: "{{ project }}"
+    state: link

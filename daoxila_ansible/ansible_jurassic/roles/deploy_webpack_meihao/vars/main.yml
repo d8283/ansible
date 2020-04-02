@@ -1,0 +1,5 @@
+---
+project_root: /cache/www/webpack
+project_root_prepare: /cache/www/webpack_prepare
+project_owner: nobody
+project_group: nobody

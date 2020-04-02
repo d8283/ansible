@@ -1,0 +1,38 @@
+---
+# 安装PHP 5.6和扩展
+- name: install php56
+  yum:
+    name: php56w
+    state: present
+- name: install php56 ext
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - php56w-bcmath
+    - php56w-opcache
+    - php56w-fpm
+    - php56w-curl
+    - php56w-gd
+    - php56w-mbstring
+    - php56w-mcrypt
+    - php56w-mysqlnd
+    - php56w-devel
+    - php56w-pear
+- name: install php56 pecl ext
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - php56w-pecl-imagick
+    - php56w-pecl-memcache
+    - php56w-pecl-memcached
+    - php56w-pecl-redis
+- name: set default php.ini
+  template:
+    src: php.ini.j2
+    dest: /etc/php.ini
+  register: php56_php_ini
+- lineinfile:
+    line: NameVirtualHost *:80
+    dest: /etc/httpd/conf/httpd.conf

@@ -1,0 +1,20 @@
+---
+- include: webtatic.yml
+- command: yumdownloader {{ item }}
+  args:
+    chdir: "{{ repobase }}"
+  with_items:
+  - php56w
+  - php56w-bcmath
+  - php56w-opcache
+  - php56w-fpm
+  - php56w-gd
+  - php56w-mbstring
+  - php56w-mcrypt
+  - php56w-mysqlnd
+  - php56w-devel
+  - php56w-pear
+  - php56w-pecl-imagick
+  - php56w-pecl-memcache
+  - php56w-pecl-memcached
+  - php56w-pecl-redis

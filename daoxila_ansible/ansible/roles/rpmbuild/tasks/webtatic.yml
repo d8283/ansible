@@ -1,0 +1,11 @@
+---
+- name: repo set?
+  shell: rpm -qa | grep -qw webtatic
+  register: result
+  failed_when: False
+  changed_when: False
+- name: set up repo
+  yum:
+    name: https://mirror.webtatic.com/yum/el6/latest.rpm
+    state: present
+  when: result|failed

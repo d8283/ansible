@@ -1,0 +1,12 @@
+---
+- name: remove project folder
+  file:
+    path: "{{ workspace }}/{{ project }}"
+    state: absent
+- name: svn checkout
+  subversion:
+    repo: "svn://svn.daoxila.org/{{ project }}/tags/{{ tag }}"
+    dest: "{{ workspace }}/{{ project }}"
+    export: yes
+    username: "{{ svn_username }}"
+    password: "{{ svn_password }}"

@@ -1,0 +1,5 @@
+---
+# 增加admin用户
+- hosts: all
+  roles:
+  - user_admin

@@ -1,0 +1,12 @@
+---
+- yum:
+    name: mongodb-org
+    state: present
+- template:
+    src: mongod.conf.j2
+    dest: /etc/mongod.conf
+  notify: restart mongod
+- service:
+    name: mongod
+    state: started
+    enabled: yes

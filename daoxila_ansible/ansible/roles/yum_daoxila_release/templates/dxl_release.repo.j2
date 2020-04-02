@@ -1,0 +1,8 @@
+[dxl_release]
+name="Daoxila Release"
+gpgcheck=0
+baseurl=
+{% for host in groups['repo_daoxila_release'] %}
+    http://{{ host }}
+{% endfor %}
+

@@ -1,0 +1,8 @@
+---
+# 部署静态资源项目
+- hosts:
+  - com_dxlfile_s4_nginx
+  roles:
+  - role: deploy_html_static
+    update_cache: yes
+    project: "{{ project }}"

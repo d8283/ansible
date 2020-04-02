@@ -1,0 +1,68 @@
+[production]
+
+phpSettings.display_startup_errors = 0
+phpSettings.display_errors = 0
+phpSettings.magic_quotes_gpc = On
+includePaths.library = APPLICATION_PATH "/../library"
+includePaths.library = APPLICATION_PATH "/../application/modules/Sys/models"
+includePaths.library = APPLICATION_PATH "/../application/modules/Cs/models"
+includePaths.library = APPLICATION_PATH "/../application/modules/Root/models"
+includePaths.library = APPLICATION_PATH "/../application/modules/Wap/models"
+includePaths.library = APPLICATION_PATH "/../application/modules/Api/models"
+bootstrap.path = APPLICATION_PATH "/Bootstrap.php"
+bootstrap.class = "Bootstrap"
+appnamespace = "Application"
+resources.frontController.moduleDirectory = APPLICATION_PATH "/modules"
+resources.frontController.moduleControllerDirectoryName = "Controllers"
+resources.frontController.defaultModule = "Root"
+resources.modules[] =
+resources.frontController.params.displayExceptions = 1
+
+; --- Layout ---
+;resources.layout.layout = "layout"
+;resources.view[] =
+
+; --- MySQL ---
+resources.db.adapter =PDO_MYSQL
+resources.db.params.host ="{{ groups.mysql_master|first }}"
+resources.db.params.username ="{{ mysql_user }}"
+resources.db.params.password ="{{ mysql_pass }}"
+resources.db.params.dbname ="dxl_exodus"
+resources.db.params.profiler = true
+
+resources.db.params.prefix =""
+resources.db.isDefaultTableAdapter = TRUE
+resources.db.params.driver_options.1002    = "SET NAMES UTF8;"
+
+; --- Autoloading Prefixes ---
+autoloaderNamespaces.extension[] = "Ext_"
+autoloaderNamespaces.extension[] = "sys_"
+autoloaderNamespaces.extension[] = "Sys_"
+autoloaderNamespaces.extension[] = "cs_"
+autoloaderNamespaces.extension[] = "Cs_"
+autoloaderNamespaces.extension[] = "Root_"
+autoloaderNamespaces.extension[] = "models_"
+autoloaderNamespaces.extension[] = "Wap_"
+autoloaderNamespaces.extension[] = "Api_"
+autoloaderNamespaces.extension[] = "Dxl_"
+; --- Smarty ---
+smarty.caching = 1
+smarty.cache_lifetime = 600
+smarty.template_dir = APPLICATION_PATH "/templates/"
+smarty.compile_dir = APPLICATION_PATH "/../data/compile_dir/"
+smarty.config_dir = ""
+smarty.cache_dir = APPLICATION_PATH "/../data/caches/"
+smarty.left_delimiter = "{"
+smarty.right_delimiter = "}"
+
+; --- session ---
+resources.session.save_handler = memcache
+resources.session.save_path = tcp://{{ groups.memcache_session|first }}:11216
+resources.session.use_only_cookies = true
+resources.session.remember_me_seconds = 20
+
+[staging : production]
+
+[testing : production]
+
+[development : production]

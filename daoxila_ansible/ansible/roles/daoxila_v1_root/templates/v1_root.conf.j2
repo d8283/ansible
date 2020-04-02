@@ -1,0 +1,25 @@
+<VirtualHost *:80>
+    DocumentRoot "/www/daoxila/daoxila_v1_root/public"
+    ServerAdmin server@daoxila.com
+    ServerName daoxila.com
+    ServerAlias *.daoxila.com dxlurl.com
+    AllowEncodedSlashes On
+    ErrorDocument 404 "/404.html"
+    ErrorDocument 403 "/404.html"
+
+    CustomLog /var/log/httpd/daoxila_v1_root-access.log combined
+    ErrorLog /var/log/httpd/daoxila_v1_root-error.log
+
+    Header add ServerID "v1root-{{ inventory_hostname|ipaddr('int') % 256 }}"
+
+    SetEnv ENV_PATH /etc/daoxila/Env.php
+
+</VirtualHost>
+
+<Directory "/www/daoxila/daoxila_v1_root/public">
+    Options -Indexes
+    DirectoryIndex index.html index.htm default.htm index.php
+    AllowOverride All
+    Order Deny,Allow
+    Allow from all
+</Directory>

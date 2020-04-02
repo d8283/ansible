@@ -1,0 +1,5 @@
+---
+- name: set up upstart script for hydrogen
+  template:
+    src: upstart.hydrogen.conf.j2
+    dest: /etc/init/hydrogen.conf

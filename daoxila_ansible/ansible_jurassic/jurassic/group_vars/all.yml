@@ -1,0 +1,43 @@
+---
+build_server: "{{ groups.build|first }}"
+imagick_policy_xml: "/usr/local/server/ImageMagick/etc/ImageMagick-6/policy.xml"
+
+# v7 parameters
+main_host: 192.168.10.6
+main_user: dxl_axin
+main_passwd: k1siclD5pOWx
+db_exodus: dxl_exodus
+db_3rd: dxl_3rd
+new_host: 192.168.10.81
+honeymoon_user: honeymoon
+honeymoon_passwd: 7DPueGgYNmxz
+db_honeymoon: dxl_honeymoon
+clothing_user: user_clothing
+clothing_passwd: 6nSdCXey3dGa
+db_clothing: dxl_clothing
+ceremony_user: ceremony
+ceremony_passwd: HTvdved75BWY
+db_ceremony: dxl_ceremony
+mq_host: 192.168.10.31
+mq_port: 5672
+mq_user: dxl
+mq_pass: didiao
+mq_3rd_topic: 3rd_topic
+call_path: /NFS/daoxila/3rd
+audio_host: "http://3rd.daoxila.org/audio/"
+qiniu_domain: "http://o79nhvzk0.bkt.clouddn.com"
+qiniu_bucket: dxl-3rd
+qiniu_accessKey: 0Oxf7XoQ6JTNS6Ay6IoE6RgRpuxDdvQoQ1UTZIxR
+qiniu_secretKey: 4rAjkXcn2y0rxSs4DpcVPtyyKSA8fkm8lH7-zmQL
+mail_host: smtp.exmail.qq.com
+mail_user: sys-notice@daoxila.com
+mail_pass: x212bpKssXth
+redis_server: 192.168.10.242
+redis_unbind_server: 192.168.10.99
+v6_host: "http://v6.daoxila.org"
+lami_api_id: 118
+lami_api_key: WXZ6T2TBLJ3M5BTDD6LP8Z2P
+lami_api_host: "http://api.teleii.com/"
+lami_kefu_api_id: 159
+lami_kefu_api_key: 5N6VVPNUUUDYE9PUN54VF5H9
+lami_kefu_api_host: 'http://api.teleii.com/'

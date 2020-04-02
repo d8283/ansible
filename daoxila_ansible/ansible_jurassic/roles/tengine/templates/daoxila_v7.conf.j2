@@ -1,0 +1,6 @@
+upstream daoxila_v7 {
+{% for host in groups.daoxila_v7 %}
+    server {{ host }}:80 weight={{ weight|default(1) }};
+{% endfor %}
+    check interval=5000 rise=2 fall=3 timeout=1000 port=80;
+}

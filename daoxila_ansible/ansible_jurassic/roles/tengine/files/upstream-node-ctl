@@ -1,0 +1,51 @@
+#!/bin/bash
+
+set -e
+
+function help() {
+    echo "usage:"
+    echo "    upstream-node-ctl <upstream> <node> <on|off>"
+    echo
+}
+
+function restart_tengine() {
+    /usr/local/server/tengine/sbin/nginx -s reload
+}
+
+function err_exit() {
+    echo $1
+    exit 1    
+}
+
+upstream=$1
+node=$2
+state=$3
+
+if [ -z $upstream ] || [ -z $node ] || [ -z $state ]; then
+    help
+    exit 1
+fi
+
+if [ $state != 'on' ] && [ $state != 'off' ]; then
+    echo "illetal state $state"
+    help
+    exit 1
+fi
+
+upstream_file=/usr/local/server/tengine/conf/upstreams/$upstream.conf
+
+if [ ! -f $upstream_file ]; then
+    err_exit "upstream $upstream not found"
+fi
+
+if ! grep -qa $node $upstream_file; then
+    err_exit "$node not found in $upstream_file"
+fi
+
+node_escaped=`echo $node | sed 's/\./\\\\./g'`
+if [ $state == 'on' ]; then
+    sed -ri "/^#.*$node_escaped/s/^#+//" $upstream_file
+else
+    sed -ri "/^[^#]+.*$node_escaped/s/^/#/" $upstream_file
+fi
+restart_tengine

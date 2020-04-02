@@ -1,0 +1,13 @@
+---
+- command: mysql -NB -e "show master status"
+  changed_when: False
+  register: master_status
+  delegate_to: "{{ master_host }}"
+  run_once: true
+- set_fact:
+    master_status_arr: "{{ master_status.stdout|str_split_space }}"
+- set_fact:
+    master_log_file: "{{ master_status_arr[0] }}"
+    master_log_pos: "{{ master_status_arr[1] }}"
+- command: "mysql -e \"change master to MASTER_HOST='{{ master_host }}', MASTER_USER='{{ master_user }}', MASTER_PASSWORD='{{ master_password }}', MASTER_LOG_FILE='{{ master_log_file }}', MASTER_LOG_POS={{ master_log_pos }}\""
+- command: "mysql -e \"start slave\""

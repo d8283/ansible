@@ -1,0 +1,12 @@
+---
+# 私有yum源，用于存放代码发布包
+- name: daoxila release yum repo
+  hosts: repo_daoxila_release
+  roles:
+    - yum_aliyun
+    - timezone_shanghai
+    - disable_iptables
+    - disable_postfix
+    - dnsmasq_client
+    - ntp_client
+    - repo_daoxila_release

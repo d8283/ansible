@@ -1,0 +1,12 @@
+---
+- name: greentea php-fpm conf
+  template:
+    src: php-fpm.greentea.conf.j2
+    dest: /etc/php-fpm.d/greentea.conf
+  notify: restart php-fpm
+- name: start php-fpm
+  service:
+    name: php-fpm
+    enabled: yes
+    state: started
+    enabled: yes

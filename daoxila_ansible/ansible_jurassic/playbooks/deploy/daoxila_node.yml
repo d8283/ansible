@@ -1,0 +1,6 @@
+---
+- hosts: daoxila_node
+  roles:
+  - role: deploy_node
+    load_balance: nginx
+  serial: 1

@@ -1,0 +1,11 @@
+---
+- name: v6 php-fpm conf
+  template:
+    src: php-fpm.v6.conf.j2
+    dest: /etc/php-fpm.d/v6.conf
+  notify: restart php-fpm
+- name: start php-fpm
+  service:
+    name: php-fpm
+    enabled: yes
+    state: started

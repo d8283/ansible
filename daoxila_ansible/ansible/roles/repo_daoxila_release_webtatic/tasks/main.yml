@@ -1,0 +1,10 @@
+---
+- yum:
+    name: yum-utils
+    state: present
+- yum:
+    name: https://mirror.webtatic.com/yum/el6/latest.rpm
+    state: present
+- command: reposync -p /tmp/ -r webtatic -l
+- command: mv -f /tmp/webtatic/* /data/yum_daoxila_release
+  notify: update yum repo

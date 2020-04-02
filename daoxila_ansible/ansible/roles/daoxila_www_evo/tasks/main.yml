@@ -1,0 +1,12 @@
+---
+- name: www_evo php-fpm conf
+  template:
+    src: php-fpm.www_evo.conf.j2
+    dest: /etc/php-fpm.d/www_evo.conf
+  notify: restart php-fpm
+- name: start php-fpm
+  service:
+    name: php-fpm
+    enabled: yes
+    state: started
+    enabled: yes

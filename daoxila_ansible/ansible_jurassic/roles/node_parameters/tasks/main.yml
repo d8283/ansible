@@ -1,0 +1,7 @@
+---
+- template:
+    src: nodeServer.json.j2
+    dest: /pub/webnode/nodeServer.json
+  register: templateResult
+- shell: pm2 restart all
+  when: templateResult.changed

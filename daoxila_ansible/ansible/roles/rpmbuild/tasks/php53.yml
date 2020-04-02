@@ -1,0 +1,21 @@
+---
+- include: webtatic.yml
+- command: yumdownloader {{ item }}
+  args:
+    chdir: "{{ repobase }}"
+  with_items:
+  - php
+  - php-pear
+  - php-devel
+  - php-bcmath
+  - php-domxml-php4-php5
+  - php-gd
+  - php-pecl-imagick
+  - php-imap
+  - php-mbstring
+  - php-mcrypt
+  - php-pecl-memcache
+  - php-mysql
+  - php-redis
+  - php-soap
+  - php-xml

@@ -1,0 +1,7 @@
+---
+# rabbitmq服务
+- name: rabbitmq
+  hosts: rabbitmq
+  roles:
+    - common
+    - rabbitmq

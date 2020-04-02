@@ -1,0 +1,10 @@
+---
+- name: composer install
+  command: "./composer.phar install --ignore-platform-reqs --no-scripts --no-dev --no-ansi --no-interaction --no-progress --optimize-autoloader --prefer-dist"
+  args:
+    chdir: "{{ workspace }}/{{ project }}"
+  environment:
+    ENV_PATH: /etc/daoxila/Env.php
+    SYMFONY_ENV: prod
+- name: cleanup
+  shell: "rm -rf {{ workspace }}/{{ project }}/app/cache/*"

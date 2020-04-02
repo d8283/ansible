@@ -1,0 +1,21 @@
+---
+- service: name=httpd state=stopped
+- yum: name=daoxila_v5 state=latest update_cache=yes
+- yum: name=daoxila_lib state=latest update_cache=yes
+- file: path=/www/daoxila/daoxila_lib owner=nobody group=nobody state=directory recurse=yes
+- file: path=/www/daoxila/library state=link src=daoxila_lib
+- copy:
+    src: upstart.feast_msg.conf
+    dest: /etc/init/feast_msg.conf
+- copy:
+    src: upstart.feast_rpc.conf
+    dest: /etc/init/feast_rpc.conf
+- file: path=/www/daoxila/daoxila_v5 owner=apache group=apache state=directory recurse=yes
+- service: name=httpd state=started
+- service:
+    name: "{{ item }}"
+    state: started
+    enabled: yes
+  with_items:
+    - feast_rpc
+    - feast_msg

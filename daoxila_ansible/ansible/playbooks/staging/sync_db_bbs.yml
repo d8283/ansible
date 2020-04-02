@@ -1,0 +1,7 @@
+---
+- hosts: mysql_master
+  roles:
+    - role: staging_db_sync_bbs
+      db_host: "{{ groups.mysql_master|first }}"
+      db_user: "{{ mysql_user }}"
+      db_pass: "{{ mysql_pass }}"

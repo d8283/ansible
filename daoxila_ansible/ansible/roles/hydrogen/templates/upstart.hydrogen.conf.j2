@@ -1,0 +1,12 @@
+description "hydrogen"
+
+start on filesystem or runlevel [2345]
+stop on shutdown
+
+chdir /opt/hydrogen
+exec npm start -- --parameter-file parameters.json >/tmp/hydrogen.log 2>/tmp/hydrogen.err
+
+kill timeout 60
+
+respawn
+respawn limit 5 60

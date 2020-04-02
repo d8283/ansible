@@ -1,0 +1,5 @@
+upstream daoxila_v3 {
+{% for host in groups.daoxila_v3 %}
+  server {{ host }}:80;
+{% endfor %}
+}

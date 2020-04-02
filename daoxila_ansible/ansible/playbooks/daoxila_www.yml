@@ -1,0 +1,12 @@
+---
+# daoxila_www的负载均衡反向代理
+- hosts: daoxila_www_nginx
+  roles:
+    - common
+    - daoxila_www_nginx
+# daoxila_www的运行环境
+- hosts: daoxila_www
+  roles:
+    - common
+    - nfs_client
+    - daoxila_www

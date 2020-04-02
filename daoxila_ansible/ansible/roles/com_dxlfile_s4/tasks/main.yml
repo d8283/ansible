@@ -1,0 +1,11 @@
+---
+- name: set up s4.dxlfile.com site conf
+  template:
+    src: s4_dxlfile.conf.j2
+    dest: /etc/nginx/sites-enabled/s4_dxlfile.conf
+  notify: reload tengine
+- name: start tengine
+  service:
+    name: tengine
+    state: started
+    enabled: yes

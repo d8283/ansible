@@ -1,0 +1,6 @@
+---
+# 部署代码tools
+- hosts:
+  - daoxila_jobs
+  roles:
+  - deploy_daoxila_jobs

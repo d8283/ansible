@@ -1,0 +1,7 @@
+---
+- command: "{{ php_bin }} ./composer.phar install --no-dev --no-ansi --no-interaction --no-progress --optimize-autoloader --prefer-dist"
+  args:
+    chdir: "{{ project_root }}/{{ project }}"
+  environment:
+    ENV_PATH: "{{ env_path }}"
+    SYMFONY_ENV: prod

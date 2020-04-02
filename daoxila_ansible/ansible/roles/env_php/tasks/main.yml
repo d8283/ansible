@@ -1,0 +1,20 @@
+---
+# 部署Env.php文件。该文件会部署到节点的硬盘上，不是老环境的NFS共享模式。
+# 
+# 这个角色包含一个Env.php的模版（Env.php.j2），模版中的变量会根据环境决定。
+# 
+# 新项目必须避免使用这个文件，使用框架原生的参数配置文件。一个很明显的弊端就是这个PHP文件
+# 无法被nodejs项目使用
+# 
+# 这个角色往往不直接应用在playbook中，而是被其他角色依赖，如daoxila_v5/meta/main.yml
+- name: set env var
+  lineinfile:
+    dest: /etc/environment
+    line: ENV_PATH=/etc/daoxila/Env.php
+- file:
+    path: /etc/daoxila
+    state: directory
+- name: Env.php
+  template:
+    src: Env.php.j2
+    dest: /etc/daoxila/Env.php

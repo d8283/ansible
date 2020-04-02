@@ -1,0 +1,12 @@
+---
+- service: name=httpd state=stopped
+- yum: name=daoxila_api state=latest update_cache=yes
+- file: path=/www/daoxila/daoxila_api owner=nobody group=nobody state=directory recurse=yes
+- template: src=application.ini.j2 dest=/www/daoxila/daoxila_api/configs/application.ini
+- template: src=db.ini.j2 dest=/www/daoxila/daoxila_api/configs/env/db.ini
+- template: src=memcache.ini.j2 dest=/www/daoxila/daoxila_api/configs/env/memcache.ini
+- template: src=redis.ini.j2 dest=/www/daoxila/daoxila_api/configs/env/redis.ini
+- yum: name=daoxila_lib state=latest update_cache=yes
+- file: path=/www/daoxila/daoxila_lib owner=nobody group=nobody state=directory recurse=yes
+- file: path=/www/daoxila/library state=link src=daoxila_lib
+- service: name=httpd state=started

@@ -1,0 +1,11 @@
+---
+- name: set up s4.dxlfile.com site conf
+  template:
+    src: com_daoxila_event.conf.j2
+    dest: /etc/nginx/sites-enabled/com_daoxila_event.conf
+  notify: reload tengine
+- name: start tengine
+  service:
+    name: tengine
+    state: started
+    enabled: yes

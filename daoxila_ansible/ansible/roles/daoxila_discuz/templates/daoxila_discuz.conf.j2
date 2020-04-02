@@ -1,0 +1,22 @@
+<VirtualHost *:80>
+    DocumentRoot "/www/daoxila/daoxila_discuz"
+    ServerAdmin server@daoxila.com
+    ServerName bbs.daoxila.com
+
+    CustomLog /var/log/httpd/daoxila_discuz-access.log combined
+    ErrorLog /var/log/httpd/daoxila_discuz-error.log
+
+    Header add ServerID "discuz-{{ inventory_hostname|ipaddr('int') % 256 }}"
+
+    SetEnv ENV_PATH /etc/daoxila/Env.php
+
+    <Directory "/www/daoxila/daoxila_discuz">
+        Dav On
+        AllowOverride all
+        Options -MultiViews -Indexes FollowSymlinks IncludesNoExec +Includes
+        DirectoryIndex index.html index.htm forum.php
+        Order allow,deny
+        Allow from all
+    </Directory>
+
+</VirtualHost>

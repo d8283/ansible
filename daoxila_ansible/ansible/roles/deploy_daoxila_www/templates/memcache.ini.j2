@@ -1,0 +1,22 @@
+;--------长连接------------
+persistent                  = 0
+;--------权重--------------
+weight                      = 1
+;--------超时--------------
+timeout                     = 1
+;--------重试时间----------
+retry_interval              = 3600
+status                      = true
+failure_callback            = 
+[0]
+{{ groups.memcache|first }}[]             = 11211
+{{ groups.memcache|first }}[]             = 11212
+{{ groups.memcache|first }}[]             = 11213
+{{ groups.memcache|first }}[]             = 11214
+{{ groups.memcache|first }}[]             = 11215
+[1]
+{{ groups.memcache|first }}[]             = 11211
+{{ groups.memcache|first }}[]             = 11213
+{{ groups.memcache|first }}[]             = 11213
+{{ groups.memcache|first }}[]             = 11214
+{{ groups.memcache|first }}[]             = 11215

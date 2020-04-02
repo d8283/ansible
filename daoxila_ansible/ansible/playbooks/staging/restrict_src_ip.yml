@@ -1,0 +1,6 @@
+---
+# staging环境特有，限制能够访问公网IP的源IP，只接受来自公司请求
+- hosts:
+  - restrict_src_ip
+  roles:
+  - restrict_src_ip

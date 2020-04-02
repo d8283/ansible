@@ -1,0 +1,32 @@
+---
+# 安装rabbitmq并初始化，建立用户，exchange等
+- name: test if rabbitmq-server is installed
+  shell: rpm -qa | grep -qw rabbitmq-server-3.5
+  register: result
+  changed_when: False
+  failed_when: False
+- copy:
+    src: rabbitmq-server-3.5.4-1.noarch.rpm
+    dest: /root/rabbitmq-server-3.5.4-1.noarch.rpm
+- name: install rabbitmq-server
+  yum:
+    name: /root/rabbitmq-server-3.5.4-1.noarch.rpm
+    state: present
+  when: result|failed
+- name: install nc
+  yum:
+    name: nc
+    state: present
+- name: upload init_rabbitmq script
+  template:
+    src: init_rabbitmq.sh.j2
+    dest: /root/init_rabbitmq.sh
+    mode: u+x
+- name: run init_rabbitmq script
+  command: sh /root/init_rabbitmq.sh
+  changed_when: False
+- name: start rabbitmq
+  service:
+    name: rabbitmq-server
+    state: started
+    enabled: yes

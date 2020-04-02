@@ -1,0 +1,5 @@
+---
+- include: html_static.yml
+  vars:
+    project: html_static_story
+

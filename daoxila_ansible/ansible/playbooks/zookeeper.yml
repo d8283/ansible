@@ -1,0 +1,7 @@
+---
+# zookeeper集群
+- name: zookeeper ensemble
+  hosts: zookeeper_ensemble
+  roles:
+    - common
+    - zookeeper

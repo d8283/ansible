@@ -1,0 +1,15 @@
+- stat:
+    path: "{{ imagick_policy_xml }}"
+  register: file_exists
+- lineinfile:
+    dest: "{{ imagick_policy_xml }}"
+    insertbefore: "</policymap>"
+    line: "{{ item }}"
+    state: present
+  with_items:
+    - '    <policy domain="coder" rights="none" pattern="EPHEMERAL" />'
+    - '    <policy domain="coder" rights="none" pattern="URL" />'
+    - '    <policy domain="coder" rights="none" pattern="HTTPS" />'
+    - '    <policy domain="coder" rights="none" pattern="MVG" />'
+    - '    <policy domain="coder" rights="none" pattern="MSL" />'
+  when: file_exists.stat.exists == True

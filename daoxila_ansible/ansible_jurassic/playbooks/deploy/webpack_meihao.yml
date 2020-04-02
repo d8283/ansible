@@ -1,0 +1,6 @@
+---
+- hosts: webpack_meihao
+  roles:
+  - deploy_webpack_meihao
+  vars:
+    project: webpack_meihao

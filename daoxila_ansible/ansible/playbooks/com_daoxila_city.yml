@@ -1,0 +1,6 @@
+---
+# 城市分站*.daoxila.com的nginx
+- hosts: com_daoxila_city_nginx
+  roles:
+    - common_public
+    - com_daoxila_city_nginx

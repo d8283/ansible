@@ -1,0 +1,4 @@
+---
+dependencies:
+- pm2
+- user_nobody

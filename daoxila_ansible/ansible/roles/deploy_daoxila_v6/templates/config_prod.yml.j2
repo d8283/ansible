@@ -1,0 +1,74 @@
+imports:
+    - { resource: parameters_prod.xml }
+    - { resource: config.yml }
+
+#framework:
+#    validation:
+#        cache: apc
+
+#doctrine:
+#    orm:
+#        metadata_cache_driver: apc
+#        result_cache_driver: apc
+#        query_cache_driver: apc
+
+monolog:
+    channels: [paylog]
+    handlers:
+        main:
+            type:         fingers_crossed
+            action_level: error
+            handler:      nested
+            channels: [!paylog]
+        nested:
+            type:  stream
+            path:  "%kernel.logs_dir%/%kernel.environment%.log"
+            level: debug
+            channels: [!paylog]
+        paylog:
+            type: stream
+            path:  %kernel.logs_dir%/paylog.log
+            channels: paylog
+
+# 支付项目配置文件
+parameters:
+    daoxila_pay.pay.config:
+        partner: 188888888888
+        key: 1234567890qwertyuiopasdfghjklzxc
+        sign_type: RSA
+        input_charset: UTF-8
+        vf_cacert: "%kernel.root_dir%/payPEM/vf_public_key.pem"
+        public_key: "%kernel.root_dir%/payPEM/public_key.pem"
+        private_key: "%kernel.root_dir%/payPEM/private_key.pem"
+        transport: http
+        pay_gateway_url: http://192.168.19.151:8186/mag/gateway/receiveOrder.do
+        member_gateway_url: http://192.168.19.151:8113/mgs/service.do
+        notify_url: http://v6.daoxila.com/pay/notify
+        royalty_rule: {"hotel":7, "wedding":20, "ceremony":20, "hunche":0, "honeymoon":0}
+        cashback_rule: {"hotel":10, "wedding":10, "ceremony":10, "hunche":0, "honeymoon":0}
+        discount_rule: {"hotel":0, "wedding":20, "ceremony":30, "hunche":12, "honeymoon":12}
+    hunche_receive_mail: luozhiwei@daoxila.com
+    honeymoon_receive_mail: luozhiwei@daoxila.com
+    daoxila_insurance.config:
+        insurance_gateway_url: http://120.27.167.36:8080/Gateway.do
+        sign_type: RSA
+        public_key: "%kernel.root_dir%/insurancePEM/public_key_dev.pem"
+        private_key: "%kernel.root_dir%/insurancePEM/private_key.pem"
+        global_params:
+            appKey: 77688cc8d80486837fa2d67f8362b4f8
+            serviceName:
+                apply: zhongan.daoxila.policy.apply
+                modify: zhongan.daoxila.policy.modify
+            format: json
+            charset: UTF-8
+            version: 1.0.0
+        default_params:
+            channelId: 93
+            bespeakPolicyNo: 834362001677199664
+            campaignId: 1000455003
+            packageDefId:
+                cancel: 50580006
+                food: 50580007
+            holderName: 上海到喜啦信息技术有限公司
+            holderCertificateType: 8
+            holderCertificateNo: 913100005559000961

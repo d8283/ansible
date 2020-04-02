@@ -1,0 +1,37 @@
+---
+# 包含所有环境配置文件（不包含代码部署）
+
+- include: memcache.yml
+- include: redis.yml
+- include: rabbitmq.yml
+- include: zookeeper.yml
+- include: solr.yml
+- include: mongodb.yml
+
+- include: mysql.yml
+
+- include: hydrogen.yml
+
+- include: daoxila_v6.yml
+- include: daoxila_greentea.yml
+- include: daoxila_v1_root.yml
+- include: daoxila_v3.yml
+- include: daoxila_v5.yml
+- include: daoxila_www.yml
+- include: daoxila_www_evo.yml
+- include: daoxila_node.yml
+- include: daoxila_api.yml
+- include: daoxila_my.yml
+- include: daoxila_service.yml
+- include: daoxila_wap.yml
+
+- include: com_dxlfile_s4.yml
+- include: com_daoxila_jsonp.yml
+- include: com_daoxila_city.yml
+- include: com_daoxila_api.yml
+- include: com_daoxila_m.yml
+- include: com_daoxila_n.yml
+- include: com_daoxila_buy.yml
+- include: com_daoxila.yml
+
+- include: staging_public_dns.yml
